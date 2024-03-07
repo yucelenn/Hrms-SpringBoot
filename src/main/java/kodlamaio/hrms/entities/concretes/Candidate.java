@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -14,12 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="candidates")
-public class Candidate extends User{
+public class Candidate{
 
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	private int id;
+	private int candidateId;
 	
 	@Column(name="first_name")
 	private String firstName;
