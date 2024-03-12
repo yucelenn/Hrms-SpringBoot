@@ -10,4 +10,11 @@ public class HrmsApplication {
 		SpringApplication.run(HrmsApplication.class, args);
 	}
 
+	/*@Bean
+    public Docket api() { 
+        return new Docket(DocumentationType.SWAGGER_2)  
+          .select()                                  
+          .apis(RequestHandlerSelectors.basePackage("kodlamaio.hrms"))                                      
+          .build();                                            
+    }*/
 }
