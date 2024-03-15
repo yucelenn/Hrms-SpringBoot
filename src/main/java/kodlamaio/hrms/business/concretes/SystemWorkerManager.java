@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.SystemWorkerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.SystemWorkerDao;
 import kodlamaio.hrms.entities.concretes.SystemWorker;
 
@@ -19,8 +21,8 @@ public class SystemWorkerManager implements SystemWorkerService{
 	}
 
 	@Override
-	public List<SystemWorker> getAll() {
-		return systemWorkerDao.findAll();
+	public DataResult<List<SystemWorker>> getAll() {
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(), "Data listelendi.");
 	}
 
 }

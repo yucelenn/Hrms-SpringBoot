@@ -10,7 +10,7 @@ public class Result {
 	}
 	
 	public Result(boolean success, String message) {
-		this(success);
+		this(success); //bu sınıftaki concstructorı çalıştıracak
 		this.message=message;
 	}
 

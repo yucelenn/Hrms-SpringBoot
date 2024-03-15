@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 
@@ -19,8 +21,8 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
-	public List<Employer> getAll() {
-		return employerDao.findAll();
+	public DataResult<List<Employer>> getAll() {
+		return new SuccessDataResult<List<Employer>>(employerDao.findAll(), "Data listelendi.");
 	}
 
 }
