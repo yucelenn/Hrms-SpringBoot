@@ -26,5 +26,5 @@ public class SystemWorker extends User{
 	
 	@Column(name="last_name")
 	private String lastName;
-	
+
 }

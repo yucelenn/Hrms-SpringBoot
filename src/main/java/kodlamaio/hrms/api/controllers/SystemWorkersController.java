@@ -15,11 +15,11 @@ import kodlamaio.hrms.entities.concretes.SystemWorker;
 
 @RestController
 @RequestMapping("/api/system_workers")
-public class SystemWorkerController {
+public class SystemWorkersController {
 
 	public SystemWorkerService systemWorkerService;
 
-	public SystemWorkerController(SystemWorkerService systemWorkerService) {
+	public SystemWorkersController(SystemWorkerService systemWorkerService) {
 		super();
 		this.systemWorkerService = systemWorkerService;
 	}
@@ -33,4 +33,5 @@ public class SystemWorkerController {
 	public Result add(@RequestBody SystemWorker systemWorker) {
 		return this.systemWorkerService.add(systemWorker);	
 	}
+	
 }
