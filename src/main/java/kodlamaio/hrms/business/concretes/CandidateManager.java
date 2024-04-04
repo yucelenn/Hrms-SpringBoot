@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.business.abstracts.checkServices.CandidateCheckService;
 import kodlamaio.hrms.business.abstracts.validationServices.MailValidationService;
-import kodlamaio.hrms.core.adapters.MernisVerification;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
 
@@ -22,16 +20,13 @@ public class CandidateManager implements CandidateService {
 
 	private CandidateDao candidateDao;
 	private CandidateCheckService checkService;
-	private MernisVerification mernisVerification;
 	private MailValidationService validationService;
 	
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, 
-			MernisVerification mernisVerification, MailValidationService validationService) {
+	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, MailValidationService validationService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.checkService = checkService;
-		this.mernisVerification = mernisVerification;
 		this.validationService = validationService;
 	}
 
@@ -43,22 +38,18 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public Result add(Candidate candidate) {
-		if (mernisVerification.checkIfRealPerson(candidate) && 
-				checkService.checkIdentityNumberIsUnique(candidate.getIdentityNumber()) &&
-				checkService.checkMailIsUnique(candidate.getEMail())  ) {
-			
-			validationService.sendValidationMail(candidate.getEMail());
-			
+		if ( checkService.isValidCandidate(candidate).isSuccess() ) {
+			validationService.sendValidationMail(candidate.getEMail()); // doğrulama için e posta gönder
 			if (validationService.validateMail(candidate.getEMail())) {
 				this.candidateDao.save(candidate);
-				return new SuccessResult("İş arayan eklendi.");
+				return checkService.isValidCandidate(candidate);
 			}
 			else {
-				return new ErrorResult("İş arayan eklenemedi.");
-			}
+				return new ErrorResult("İş arayan eklenemedi, Eposta ile doğrulama gerekiyor!");
+			}		
 		}
 		else {
-			return new ErrorResult("İş arayan eklenemedi.");
+			return checkService.isValidCandidate(candidate);
 		}
 	}
 
