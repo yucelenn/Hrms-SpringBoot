@@ -26,16 +26,14 @@ public class EmployerCheckManager implements EmployerCheckService{
 
 	@Override
 	public Result isValidEmployer(Employer employer) {
-		if (checkMailIsUnique(employer.getEMail())) {
-			if (checkMailMatchesDomain(employer.getEMail(), employer.getWebAdress())) {
-				return new SuccessResult("İş veren eklendi.");
-			}
-			else {
-				return new ErrorResult("İş veren eklenemedi, E posta ile domain uyuşmuyor!");
-			}
+		if ( !(checkMailIsUnique(employer.getEMail())) ) { //mail daha önce kullanılmışsa
+			return new ErrorResult("İş veren eklenemedi, Bu e posta daha önce kullanılmış!");
+		}
+		else if ( !(checkMailMatchesDomain(employer.getEMail(), employer.getWebAdress())) ) { //mail ile domain uyuşmuyorsa
+			return new ErrorResult("İş veren eklenemedi, E posta ile domain uyuşmuyor!");
 		}
 		else {
-			return new ErrorResult("İş veren eklenemedi, Bu e posta daha önce kullanılmış!");
+			return new SuccessResult("İş veren eklendi."); //isterler sağlanıyorsa
 		}
 	}
 
