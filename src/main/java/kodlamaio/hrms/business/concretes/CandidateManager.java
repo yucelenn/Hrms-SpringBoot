@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.business.abstracts.checkServices.CandidateCheckService;
+import kodlamaio.hrms.business.abstracts.validationServices.MailValidationService;
 import kodlamaio.hrms.core.adapters.MernisVerification;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -22,13 +23,16 @@ public class CandidateManager implements CandidateService {
 	private CandidateDao candidateDao;
 	private CandidateCheckService checkService;
 	private MernisVerification mernisVerification;
+	private MailValidationService validationService;
 	
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, MernisVerification mernisVerification) {
+	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, 
+			MernisVerification mernisVerification, MailValidationService validationService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.checkService = checkService;
 		this.mernisVerification = mernisVerification;
+		this.validationService = validationService;
 	}
 
 	@Override
@@ -42,8 +46,16 @@ public class CandidateManager implements CandidateService {
 		if (mernisVerification.checkIfRealPerson(candidate) && 
 				checkService.checkIdentityNumberIsUnique(candidate.getIdentityNumber()) &&
 				checkService.checkMailIsUnique(candidate.getEMail())  ) {
-			this.candidateDao.save(candidate);
-			return new SuccessResult("İş arayan eklendi.");
+			
+			validationService.sendValidationMail(candidate.getEMail());
+			
+			if (validationService.validateMail(candidate.getEMail())) {
+				this.candidateDao.save(candidate);
+				return new SuccessResult("İş arayan eklendi.");
+			}
+			else {
+				return new ErrorResult("İş arayan eklenemedi.");
+			}
 		}
 		else {
 			return new ErrorResult("İş arayan eklenemedi.");
