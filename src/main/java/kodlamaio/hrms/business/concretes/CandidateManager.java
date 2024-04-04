@@ -39,7 +39,9 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public Result add(Candidate candidate) {
-		if (mernisVerification.checkIfRealPerson(candidate)) {
+		if (mernisVerification.checkIfRealPerson(candidate) && 
+				checkService.checkIdentityNumberIsUnique(candidate.getIdentityNumber()) &&
+				checkService.checkMailIsUnique(candidate.getEMail())  ) {
 			this.candidateDao.save(candidate);
 			return new SuccessResult("İş arayan eklendi.");
 		}
