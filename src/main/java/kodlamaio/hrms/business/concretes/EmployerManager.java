@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.business.abstracts.checkServices.EmployerCheckService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 
@@ -17,11 +17,13 @@ import kodlamaio.hrms.entities.concretes.Employer;
 public class EmployerManager implements EmployerService{
 
 	private EmployerDao employerDao;
+	private EmployerCheckService checkService;
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao) {
+	public EmployerManager(EmployerDao employerDao, EmployerCheckService checkService) {
 		super();
 		this.employerDao = employerDao;
+		this.checkService = checkService;
 	}
 
 	@Override
@@ -31,8 +33,13 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public Result add(Employer employer) {
-		this.employerDao.save(employer);
-		return new SuccessResult("İş veren eklendi.");
+		if ( checkService.isValidEmployer(employer).isSuccess() ) {
+			this.employerDao.save(employer);
+			return checkService.isValidEmployer(employer);
+		}
+		else {
+			return checkService.isValidEmployer(employer);
+		}
 	}
 
 }
