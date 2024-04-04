@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"kodlamaio.hrms","l":"HrmsApplication"}];updateSearchResults();
