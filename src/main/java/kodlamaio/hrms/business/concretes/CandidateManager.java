@@ -2,10 +2,14 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.abstracts.checkServices.CandidateCheckService;
+import kodlamaio.hrms.core.adapters.MernisVerification;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -16,10 +20,15 @@ import kodlamaio.hrms.entities.concretes.Candidate;
 public class CandidateManager implements CandidateService {
 
 	private CandidateDao candidateDao;
+	private CandidateCheckService checkService;
+	private MernisVerification mernisVerification;
 	
-	public CandidateManager(CandidateDao candidateDao) {
+	@Autowired
+	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, MernisVerification mernisVerification) {
 		super();
 		this.candidateDao = candidateDao;
+		this.checkService = checkService;
+		this.mernisVerification = mernisVerification;
 	}
 
 	@Override
@@ -30,8 +39,13 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public Result add(Candidate candidate) {
-		this.candidateDao.save(candidate);
-		return new SuccessResult("İş arayan eklendi.");
+		if (mernisVerification.checkIfRealPerson(candidate)) {
+			this.candidateDao.save(candidate);
+			return new SuccessResult("İş arayan eklendi.");
+		}
+		else {
+			return new ErrorResult("İş arayan eklenemedi.");
+		}
 	}
 
 }
