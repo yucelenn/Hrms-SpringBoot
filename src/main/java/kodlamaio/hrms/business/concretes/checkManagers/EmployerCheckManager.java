@@ -25,17 +25,43 @@ public class EmployerCheckManager implements EmployerCheckService{
 	}
 
 	@Override
-	public Result isValidEmployer(Employer employer) {
-		if ( !(checkMailIsUnique(employer.getEMail())) ) { //mail daha önce kullanılmışsa
-			return new ErrorResult("İş veren eklenemedi, Bu e posta daha önce kullanılmış!");
+	public Result checkInformationsFulfilled(Employer employer) {
+		if (employer.getCompanyName().isEmpty()) {
+			return new ErrorResult("Lütfen şirket isminizi giriniz!");
 		}
-		else if ( !(checkMailMatchesDomain(employer.getEMail(), employer.getWebAdress())) ) { //mail ile domain uyuşmuyorsa
-			return new ErrorResult("İş veren eklenemedi, E posta ile domain uyuşmuyor!");
+		else if (employer.getWebAdress().isEmpty()) {
+			return new ErrorResult("Lütfen web site adresinizi giriniz!");
+		}
+		else if (employer.getEMail().isEmpty()) {
+			return new ErrorResult("Lütfen e postanızı giriniz!");
+		}
+		else if (employer.getPhoneNumber().isEmpty()) {
+			return new ErrorResult("Lütfen telefon numaranızı giriniz!");
+		}
+		else if (employer.getPassword().isEmpty()) {
+			return new ErrorResult("Lütfen şifre bilgisini giriniz!");
 		}
 		else {
-			return new SuccessResult("İş veren eklendi."); //isterler sağlanıyorsa
+			return new SuccessResult("Bilgi girişi başarılı!");
 		}
 	}
 
-	
+	@Override
+	public Result isValidEmployer(Employer employer) {
+		if (checkInformationsFulfilled(employer).isSuccess()) { //bilgiler eksiksiz girilmişse
+			if ( !(checkMailIsUnique(employer.getEMail())) ) { //mail daha önce kullanılmışsa
+				return new ErrorResult("İş veren eklenemedi, Bu e posta daha önce kullanılmış!");
+			}
+			else if ( !(checkMailMatchesDomain(employer.getEMail(), employer.getWebAdress())) ) { //mail ile domain uyuşmuyorsa
+				return new ErrorResult("İş veren eklenemedi, E posta ile domain uyuşmuyor!");
+			}
+			else {
+				return new SuccessResult("İş veren eklendi."); //isterler sağlanıyorsa
+			}
+		} 
+		else {
+			return checkInformationsFulfilled(employer);
+		}	
+	}
+
 }
