@@ -37,19 +37,50 @@ public class CandidateCheckManager implements CandidateCheckService{
 	}
 
 	@Override
-	public Result isValidCandidate(Candidate candidate) {
-		if ( !(mernisVerification.checkIfRealPerson(candidate)) ) { //mernis doğrulaması false ise
-			return new ErrorResult("İş arayan eklenemedi, Bilgileriniz Mernis sistemi ile uyuşmuyor!"); 
+	public Result checkInformationsFulfilled(Candidate candidate) {
+		if (candidate.getFirstName().isEmpty()) {
+			return new ErrorResult("Lütfen isminizi giriniz!");
 		}
-		else if ( !(checkMailIsUnique(candidate.getEMail())) ) { //mail daha önce kullanılmışsa
-			return new ErrorResult("İş arayan eklenemedi, Bu e posta daha önce kullanılmış!");
+		else if (candidate.getLastName().isEmpty()) {
+			return new ErrorResult("Lütfen soyisminizi giriniz!");
 		}
-		else if ( !(checkIdentityNumberIsUnique(candidate.getIdentityNumber())) ) { //tc no daha önce kullanılmışsa
-			return new ErrorResult("İş arayan eklenemedi, Bu Tc kimlik numarası daha önce kullanılmış!");
+		else if (candidate.getIdentityNumber().isEmpty()) {
+			return new ErrorResult("Lütfen Tc kimlik numaranızı giriniz!");
+		}
+		else if (candidate.getBirthYear().isEmpty()) {
+			return new ErrorResult("Lütfen doğum yılınızı giriniz!");
+		}
+		else if (candidate.getEMail().isEmpty()) {
+			return new ErrorResult("Lütfen e postanızı giriniz!");
+		}
+		else if (candidate.getPassword().isEmpty()) {
+			return new ErrorResult("Lütfen şifre bilgisini giriniz!");
 		}
 		else {
-			return new SuccessResult("İş arayan eklendi.");  //isterler sağlanıyorsa
+			return new SuccessResult("Bilgi girişi başarılı!");
 		}
+	}
+	
+	@Override
+	public Result isValidCandidate(Candidate candidate) {
+		if (checkInformationsFulfilled(candidate).isSuccess()) {
+			if ( !(mernisVerification.checkIfRealPerson(candidate)) ) { //mernis doğrulaması false ise
+				return new ErrorResult("İş arayan eklenemedi, Bilgileriniz Mernis sistemi ile uyuşmuyor!"); 
+			}
+			else if ( !(checkMailIsUnique(candidate.getEMail())) ) { //mail daha önce kullanılmışsa
+				return new ErrorResult("İş arayan eklenemedi, Bu e posta daha önce kullanılmış!");
+			}
+			else if ( !(checkIdentityNumberIsUnique(candidate.getIdentityNumber())) ) { //tc no daha önce kullanılmışsa
+				return new ErrorResult("İş arayan eklenemedi, Bu Tc kimlik numarası daha önce kullanılmış!");
+			}
+			else {
+				return new SuccessResult("İş arayan eklendi.");  //isterler sağlanıyorsa
+			}
+		}
+		else {
+			return checkInformationsFulfilled(candidate);
+		}
+		
 	}
 
 }

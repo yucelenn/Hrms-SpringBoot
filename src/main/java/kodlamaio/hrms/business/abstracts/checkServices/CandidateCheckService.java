@@ -6,5 +6,7 @@ import kodlamaio.hrms.entities.concretes.Candidate;
 public interface CandidateCheckService extends CheckService{
 
 	boolean checkIdentityNumberIsUnique(String identityNumber);
+	Result checkInformationsFulfilled(Candidate candidate);
 	Result isValidCandidate(Candidate candidate);
+	
 }
