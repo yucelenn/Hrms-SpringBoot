@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobService;
+import kodlamaio.hrms.business.abstracts.checkServices.JobCheckService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -17,11 +18,13 @@ import kodlamaio.hrms.entities.concretes.Job;
 public class JobManager implements JobService {
 
 	private JobDao jobDao;
+	private JobCheckService checkService;
 	
 	@Autowired
-	public JobManager(JobDao jobDao) {
+	public JobManager(JobDao jobDao, JobCheckService checkService) {
 		super();
 		this.jobDao = jobDao;
+		this.checkService = checkService;
 	}
 
 	@Override
@@ -31,8 +34,13 @@ public class JobManager implements JobService {
 
 	@Override
 	public Result add(Job job) {
-		this.jobDao.save(job);
-		return new SuccessResult("İş ünvanı eklendi.");
+		if (checkService.isValidJob(job).isSuccess()) {
+			this.jobDao.save(job);
+			return checkService.isValidJob(job);
+		}
+		else {
+			return checkService.isValidJob(job);
+		}
 	}
 
 }
