@@ -36,4 +36,10 @@ public class UserManager implements UserService {
 		return new SuccessResult("Kullanıcı eklendi.");
 	}
 
+	@Override
+	public DataResult<User> getByeMail(String eMail) {
+		
+		return new SuccessDataResult<User>(this.userDao.getByeMail(eMail), "Kullanıcı data'sı listelendi.");
+	}
+
 }
