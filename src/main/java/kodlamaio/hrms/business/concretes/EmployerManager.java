@@ -52,4 +52,10 @@ public class EmployerManager implements EmployerService{
 		}
 	}
 
+	@Override
+	public DataResult<Employer> getByeMail(String eMail) {
+
+		return new SuccessDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren data'sı listelendi.");
+	}
+
 }
