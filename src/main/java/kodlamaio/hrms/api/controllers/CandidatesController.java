@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
@@ -31,7 +32,11 @@ public class CandidatesController {
 	
 	@PostMapping("/add")
 	public Result add(@RequestBody Candidate candidate) {
-		return this.candidateService.add(candidate);
-		
+		return this.candidateService.add(candidate);		
+	}
+	
+	@GetMapping("/getByeMail")
+	public DataResult<Candidate> getByeMail(@RequestParam String eMail) {
+		return this.candidateService.getByeMail(eMail);
 	}
 }

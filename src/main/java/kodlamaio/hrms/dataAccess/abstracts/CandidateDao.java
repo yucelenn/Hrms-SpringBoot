@@ -6,4 +6,5 @@ import kodlamaio.hrms.entities.concretes.Candidate;
 
 public interface CandidateDao extends JpaRepository<Candidate, Integer>{
 
+	Candidate getByeMail(String eMail);
 }

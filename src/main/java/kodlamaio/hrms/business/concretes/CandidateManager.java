@@ -53,4 +53,10 @@ public class CandidateManager implements CandidateService {
 		}
 	}
 
+	@Override
+	public DataResult<Candidate> getByeMail(String eMail) {
+		
+		return new SuccessDataResult<Candidate>(candidateDao.getByeMail(eMail), "İş arayan data'sı listelendi.");
+	}
+
 }
