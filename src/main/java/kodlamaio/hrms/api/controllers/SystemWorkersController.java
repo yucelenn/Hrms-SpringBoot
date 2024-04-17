@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.SystemWorkerService;
@@ -34,4 +35,8 @@ public class SystemWorkersController {
 		return this.systemWorkerService.add(systemWorker);	
 	}
 	
+	@GetMapping("/getByeMail")
+	public DataResult<SystemWorker> getByeMail(@RequestParam String eMail) {
+		return this.systemWorkerService.getByeMail(eMail);
+	}
 }

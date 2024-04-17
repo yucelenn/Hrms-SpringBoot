@@ -35,4 +35,11 @@ public class SystemWorkerManager implements SystemWorkerService{
 		return new SuccessResult("Sistem personeli eklendi.");
 	}
 
+	@Override
+	public DataResult<SystemWorker> getByeMail(String eMail) {
+		
+		return new SuccessDataResult<SystemWorker>(this.systemWorkerDao.getByeMail(eMail),
+				"Sistem çalışanı data'sı listelendi.");
+	}
+
 }

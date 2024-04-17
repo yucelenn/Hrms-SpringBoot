@@ -10,4 +10,6 @@ public interface SystemWorkerService {
 
 	DataResult<List<SystemWorker>> getAll();
 	Result add(SystemWorker systemWorker);
+	
+	DataResult<SystemWorker> getByeMail(String eMail);
 }

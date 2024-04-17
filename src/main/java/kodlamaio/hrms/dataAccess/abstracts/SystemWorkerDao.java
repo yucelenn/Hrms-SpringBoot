@@ -6,4 +6,5 @@ import kodlamaio.hrms.entities.concretes.SystemWorker;
 
 public interface SystemWorkerDao extends JpaRepository<SystemWorker, Integer>{
 
+	SystemWorker getByeMail(String eMail);
 }
