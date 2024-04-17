@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.JobService;
 import kodlamaio.hrms.business.abstracts.checkServices.JobCheckService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -41,6 +42,14 @@ public class JobManager implements JobService {
 		else {
 			return checkService.isValidJob(job);
 		}
+	}
+
+	@Override
+	public DataResult<Job> getByJobTitle(String jobTitle) {
+		//iş kodlarını buraya döşe
+
+		return new SuccessDataResult<Job>(this.jobDao.getByJobTitle(jobTitle), "Data listelendi.");
+	
 	}
 
 }
