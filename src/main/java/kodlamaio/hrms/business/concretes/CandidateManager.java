@@ -56,7 +56,31 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public DataResult<Candidate> getByeMail(String eMail) {
 		
-		return new SuccessDataResult<Candidate>(candidateDao.getByeMail(eMail), "İş arayan data'sı listelendi.");
+		return new SuccessDataResult<Candidate>(this.candidateDao.getByeMail(eMail), "İş arayan data'sı listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Candidate>> getByFirstName(String firstName) {
+
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstName(firstName), "İş arayan data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Candidate>> getByLastName(String lastName) {
+
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastName(lastName), "İş arayan data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<Candidate> getByIdentityNumber(String identityNumber) {
+		
+		return new SuccessDataResult<Candidate>(this.candidateDao.getByIdentityNumber(identityNumber), "İş arayan data'sı listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Candidate>> getByBirthYear(String birthYear) {
+
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByBirthYear(birthYear), "İş arayan data'ları listelendi.");
 	}
 
 }

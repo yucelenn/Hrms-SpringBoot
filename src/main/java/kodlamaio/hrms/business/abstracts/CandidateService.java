@@ -10,6 +10,9 @@ public interface CandidateService {
 
 	DataResult<List<Candidate>> getAll();
 	Result add(Candidate candidate);
-	
+	DataResult<Candidate> getByIdentityNumber(String identityNumber);
 	DataResult<Candidate> getByeMail(String eMail);
+	DataResult<List<Candidate>> getByFirstName(String firstName);
+	DataResult<List<Candidate>> getByLastName(String lastName);
+	DataResult<List<Candidate>> getByBirthYear(String birthYear);
 }

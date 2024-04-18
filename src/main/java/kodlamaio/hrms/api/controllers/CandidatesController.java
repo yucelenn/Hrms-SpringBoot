@@ -39,4 +39,24 @@ public class CandidatesController {
 	public DataResult<Candidate> getByeMail(@RequestParam String eMail) {
 		return this.candidateService.getByeMail(eMail);
 	}
+	
+	@GetMapping("/getByFirstName")
+	public DataResult<List<Candidate>> getByFirstName(@RequestParam String firstName) {
+		return this.candidateService.getByFirstName(firstName);
+	}
+	
+	@GetMapping("/getByLastName")
+	public DataResult<List<Candidate>> getByLastName(@RequestParam String lastName) {
+		return this.candidateService.getByLastName(lastName);
+	}
+	
+	@GetMapping("/getByIdentityNumber")
+	public DataResult<Candidate> getByIdentityNumber(@RequestParam String identityNumber) {
+		return this.candidateService.getByIdentityNumber(identityNumber);
+	}
+	
+	@GetMapping("/getByBirthYear")
+	public DataResult<List<Candidate>> getByBirthYear(@RequestParam String birthYear) {
+		return this.candidateService.getByBirthYear(birthYear);
+	}
 }
