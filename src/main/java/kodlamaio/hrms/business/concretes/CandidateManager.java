@@ -95,4 +95,10 @@ public class CandidateManager implements CandidateService {
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastNameContains(lastName), "İş arayan data'ları listelendi.");
 	}
 
+	@Override
+	public DataResult<List<Candidate>> getByFirstNameStartsWith(String firstName) {
+		
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameStartsWith(firstName), "İş arayan data'ları listelendi.");
+	}
+
 }

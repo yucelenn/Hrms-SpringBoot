@@ -15,4 +15,5 @@ public interface CandidateDao extends JpaRepository<Candidate, Integer>{
 	List<Candidate> getByBirthYear(String birthYear);
 	List<Candidate> getByFirstNameContains(String firstName);
 	List<Candidate> getByLastNameContains(String lastName);
+	List<Candidate> getByFirstNameStartsWith(String firstName);
 }
