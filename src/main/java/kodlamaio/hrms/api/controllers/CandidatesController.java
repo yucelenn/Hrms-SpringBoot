@@ -74,4 +74,9 @@ public class CandidatesController {
 	public DataResult<List<Candidate>> getByFirstNameStartsWith(@RequestParam String firstName) {
 		return this.candidateService.getByFirstNameStartsWith(firstName);
 	}
+	
+	@GetMapping("/getByLastNameStartsWith")
+	public DataResult<List<Candidate>> getByLastNameStartsWith(@RequestParam String lastName) {
+		return this.candidateService.getByLastNameStartsWith(lastName);
+	}
 }
