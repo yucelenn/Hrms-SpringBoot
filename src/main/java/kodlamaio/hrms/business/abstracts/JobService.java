@@ -11,4 +11,5 @@ public interface JobService {
 	Result add(Job job);
 	
 	DataResult<Job> getByJobTitle(String jobTitle);
+	DataResult<List<Job>> getByJobTitleStartsWith(String jobTitle);
 }
