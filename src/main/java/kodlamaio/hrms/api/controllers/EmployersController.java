@@ -39,4 +39,19 @@ public class EmployersController {
 	public DataResult<Employer> getByeMail(@RequestParam String eMail) {
 		return this.employerService.getByeMail(eMail);
 	}
+	
+	@GetMapping("/getByCompanyName")
+	public DataResult<Employer> getByCompanyName(@RequestParam String companyName) {
+		return this.employerService.getByCompanyName(companyName);
+	}
+	
+	@GetMapping("/getByWebAdress")
+	public DataResult<Employer> getByWebAdress(@RequestParam String webAdress) {
+		return this.employerService.getByWebAdress(webAdress);
+	}
+	
+	@GetMapping("/getByPhoneNumber")
+	public DataResult<Employer> getByPhoneNumber(@RequestParam String phoneNumber) {
+		return this.employerService.getByPhoneNumber(phoneNumber);
+	}
 }

@@ -58,4 +58,22 @@ public class EmployerManager implements EmployerService{
 		return new SuccessDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren data'sı listelendi.");
 	}
 
+	@Override
+	public DataResult<Employer> getByCompanyName(String companyName) {
+		
+		return new SuccessDataResult<Employer>(this.employerDao.getByCompanyName(companyName), "İş veren data'sı listelendi.");
+	}
+
+	@Override
+	public DataResult<Employer> getByWebAdress(String webAdress) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<Employer>(this.employerDao.getByWebAdress(webAdress), "İş veren data'sı listelendi.");
+	}
+
+	@Override
+	public DataResult<Employer> getByPhoneNumber(String phoneNumber) {
+		
+		return new SuccessDataResult<Employer>(this.employerDao.getByPhoneNumber(phoneNumber), "İş veren data'sı listelendi.");
+	}
+
 }

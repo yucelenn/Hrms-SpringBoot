@@ -12,4 +12,7 @@ public interface EmployerService {
 	Result add(Employer employer);
 	
 	DataResult<Employer> getByeMail(String eMail);
+	DataResult<Employer> getByCompanyName(String companyName);
+	DataResult<Employer> getByWebAdress(String webAdress);
+	DataResult<Employer> getByPhoneNumber(String phoneNumber);
 }
