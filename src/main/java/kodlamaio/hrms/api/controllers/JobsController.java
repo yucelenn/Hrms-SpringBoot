@@ -44,4 +44,9 @@ public class JobsController {
 	public DataResult<List<Job>> getByJobTitleStartsWith(@RequestParam String jobTitle) {
 		return this.jobService.getByJobTitleStartsWith(jobTitle);
 	}
+	
+	@GetMapping("/getByJobTitleContains")
+	public DataResult<List<Job>> getByJobTitleContains(@RequestParam String jobTitle) {
+		return this.jobService.getByJobTitleContains(jobTitle);
+	}
 }

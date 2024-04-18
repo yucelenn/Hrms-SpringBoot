@@ -56,4 +56,10 @@ public class JobManager implements JobService {
 		return new SuccessDataResult<List<Job>>(this.jobDao.getByJobTitleStartsWith(jobTitle), "İş ünvanları listelendi.");
 	}
 
+	@Override
+	public DataResult<List<Job>> getByJobTitleContains(String jobTitle) {
+		
+		return new SuccessDataResult<List<Job>>(this.jobDao.getByJobTitleContains(jobTitle), "İş ünvanları listelendi.");
+	}
+
 }
