@@ -59,4 +59,14 @@ public class CandidatesController {
 	public DataResult<List<Candidate>> getByBirthYear(@RequestParam String birthYear) {
 		return this.candidateService.getByBirthYear(birthYear);
 	}
+	
+	@GetMapping("/getByFirstNameContains")
+	public DataResult<List<Candidate>> getByFirstNameContains(@RequestParam String firstName) {
+		return this.candidateService.getByFirstNameContains(firstName);
+	}
+	
+	@GetMapping("/getByLastNameContains")
+	public DataResult<List<Candidate>> getByLastNameContains(@RequestParam String lastName) {
+		return this.candidateService.getByLastNameContains(lastName);
+	}
 }

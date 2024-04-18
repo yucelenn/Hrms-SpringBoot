@@ -83,4 +83,16 @@ public class CandidateManager implements CandidateService {
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByBirthYear(birthYear), "İş arayan data'ları listelendi.");
 	}
 
+	@Override
+	public DataResult<List<Candidate>> getByFirstNameContains(String firstName) {
+		
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameContains(firstName), "İş arayan data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Candidate>> getByLastNameContains(String lastName) {
+		
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastNameContains(lastName), "İş arayan data'ları listelendi.");
+	}
+
 }

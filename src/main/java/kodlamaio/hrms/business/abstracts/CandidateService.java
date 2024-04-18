@@ -15,4 +15,6 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getByFirstName(String firstName);
 	DataResult<List<Candidate>> getByLastName(String lastName);
 	DataResult<List<Candidate>> getByBirthYear(String birthYear);
+	DataResult<List<Candidate>> getByFirstNameContains(String firstName);
+	DataResult<List<Candidate>> getByLastNameContains(String lastName);
 }
