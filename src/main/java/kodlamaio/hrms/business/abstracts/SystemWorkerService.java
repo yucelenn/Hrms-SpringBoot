@@ -15,4 +15,5 @@ public interface SystemWorkerService {
 	DataResult<List<SystemWorker>> getByFirstName(String firstName);
 	DataResult<List<SystemWorker>> getByLastName(String lastName);
 	DataResult<List<SystemWorker>> getByFirstNameStartsWith(String firstName);
+	DataResult<List<SystemWorker>> getByFirstNameContains(String firstName);
 }

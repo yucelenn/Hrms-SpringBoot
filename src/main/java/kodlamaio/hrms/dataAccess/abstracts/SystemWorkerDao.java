@@ -12,4 +12,5 @@ public interface SystemWorkerDao extends JpaRepository<SystemWorker, Integer>{
 	List<SystemWorker> getByFirstName(String firstName);
 	List<SystemWorker> getByLastName(String lastName);
 	List<SystemWorker> getByFirstNameStartsWith(String firstName);
+	List<SystemWorker> getByFirstNameContains(String firstName);
 }

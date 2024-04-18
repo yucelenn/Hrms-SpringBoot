@@ -55,4 +55,9 @@ public class SystemWorkersController {
 		return this.systemWorkerService.getByFirstNameStartsWith(firstName);
 	}
 	
+	@GetMapping("/getByFirstNameContains")
+	public DataResult<List<SystemWorker>> getByFirstNameContains(@RequestParam String firstName){
+		return this.systemWorkerService.getByFirstNameContains(firstName);
+	}
+	
 }
