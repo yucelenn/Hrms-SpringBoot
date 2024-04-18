@@ -59,4 +59,9 @@ public class EmployersController {
 	public DataResult<List<Employer>> getByCompanyNameStartsWith(@RequestParam String companyName) {
 		return this.employerService.getByCompanyNameStartsWith(companyName);
 	}
+	
+	@GetMapping("/getByCompanyNameContains")
+	public DataResult<List<Employer>> getByCompanyNameContains(@RequestParam String companyName) {
+		return this.employerService.getByCompanyNameContains(companyName);
+	}
 }

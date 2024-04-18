@@ -82,4 +82,10 @@ public class EmployerManager implements EmployerService{
 		return new SuccessDataResult<List<Employer>>(this.employerDao.getByCompanyNameStartsWith(companyName), "İş veren data'ları listelendi.");
 	}
 
+	@Override
+	public DataResult<List<Employer>> getByCompanyNameContains(String companyName) {
+		
+		return new SuccessDataResult<List<Employer>>(this.employerDao.getByCompanyNameContains(companyName), "İş veren data'ları listelendi.");
+	}
+
 }

@@ -16,4 +16,5 @@ public interface EmployerService {
 	DataResult<Employer> getByWebAdress(String webAdress);
 	DataResult<Employer> getByPhoneNumber(String phoneNumber);
 	DataResult<List<Employer>> getByCompanyNameStartsWith(String companyName);
+	DataResult<List<Employer>> getByCompanyNameContains(String companyName);
 }
