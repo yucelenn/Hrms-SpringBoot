@@ -11,4 +11,5 @@ public interface SystemWorkerDao extends JpaRepository<SystemWorker, Integer>{
 	SystemWorker getByeMail(String eMail);
 	List<SystemWorker> getByFirstName(String firstName);
 	List<SystemWorker> getByLastName(String lastName);
+	List<SystemWorker> getByFirstNameStartsWith(String firstName);
 }

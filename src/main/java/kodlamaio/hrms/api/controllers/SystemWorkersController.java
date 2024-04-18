@@ -50,4 +50,9 @@ public class SystemWorkersController {
 		return this.systemWorkerService.getByLastName(lastName);
 	}
 	
+	@GetMapping("/getByFirstNameStartsWith")
+	public DataResult<List<SystemWorker>> getByFirstNameStartsWith(@RequestParam String firstName){
+		return this.systemWorkerService.getByFirstNameStartsWith(firstName);
+	}
+	
 }
