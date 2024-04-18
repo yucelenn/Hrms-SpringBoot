@@ -12,4 +12,6 @@ public interface SystemWorkerService {
 	Result add(SystemWorker systemWorker);
 	
 	DataResult<SystemWorker> getByeMail(String eMail);
+	DataResult<List<SystemWorker>> getByFirstName(String firstName);
+	DataResult<List<SystemWorker>> getByLastName(String lastName);
 }

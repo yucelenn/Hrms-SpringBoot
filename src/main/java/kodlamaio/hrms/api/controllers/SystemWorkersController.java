@@ -26,7 +26,7 @@ public class SystemWorkersController {
 	}
 	
 	@GetMapping("/getall")
-	DataResult<List<SystemWorker>> getAll(){
+	public DataResult<List<SystemWorker>> getAll(){
 		return this.systemWorkerService.getAll();
 	}
 	
@@ -39,4 +39,15 @@ public class SystemWorkersController {
 	public DataResult<SystemWorker> getByeMail(@RequestParam String eMail) {
 		return this.systemWorkerService.getByeMail(eMail);
 	}
+	
+	@GetMapping("/getByFirstName")
+	public DataResult<List<SystemWorker>> getByFirstName(@RequestParam String firstName){
+		return this.systemWorkerService.getByFirstName(firstName);
+	}
+	
+	@GetMapping("/getByLastName")
+	public DataResult<List<SystemWorker>> getByLastName(@RequestParam String lastName){
+		return this.systemWorkerService.getByLastName(lastName);
+	}
+	
 }

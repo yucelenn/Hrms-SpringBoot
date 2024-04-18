@@ -42,4 +42,18 @@ public class SystemWorkerManager implements SystemWorkerService{
 				"Sistem çalışanı data'sı listelendi.");
 	}
 
+	@Override
+	public DataResult<List<SystemWorker>> getByFirstName(String firstName) {
+		
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByFirstName(firstName),
+				"Sistem çalışanı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<SystemWorker>> getByLastName(String lastName) {
+		
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByLastName(lastName),
+				"Sistem çalışanı data'ları listelendi.");
+	}
+
 }
