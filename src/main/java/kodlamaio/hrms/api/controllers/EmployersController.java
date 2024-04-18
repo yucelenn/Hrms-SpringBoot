@@ -54,4 +54,9 @@ public class EmployersController {
 	public DataResult<Employer> getByPhoneNumber(@RequestParam String phoneNumber) {
 		return this.employerService.getByPhoneNumber(phoneNumber);
 	}
+	
+	@GetMapping("/getByCompanyNameStartsWith")
+	public DataResult<List<Employer>> getByCompanyNameStartsWith(@RequestParam String companyName) {
+		return this.employerService.getByCompanyNameStartsWith(companyName);
+	}
 }
