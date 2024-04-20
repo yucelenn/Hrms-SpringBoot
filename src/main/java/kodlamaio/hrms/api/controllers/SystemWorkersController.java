@@ -60,4 +60,8 @@ public class SystemWorkersController {
 		return this.systemWorkerService.getByFirstNameContains(firstName);
 	}
 	
+	@GetMapping("/getAllPageable")
+	public DataResult<List<SystemWorker>> getAll(int pageNo, int pageSize) {
+		return this.systemWorkerService.getAll(pageNo, pageSize);
+	}
 }

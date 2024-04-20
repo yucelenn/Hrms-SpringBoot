@@ -3,6 +3,8 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.SystemWorkerService;
@@ -68,6 +70,13 @@ public class SystemWorkerManager implements SystemWorkerService{
 		
 		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByFirstNameContains(firstName),
 				"Sistem çalışanı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<SystemWorker>> getAll(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(pageable).getContent(), 
+				"Sayfalama ile sistem çalışanı data'ları listelendi.");
 	}
 
 }

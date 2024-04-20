@@ -9,6 +9,7 @@ import kodlamaio.hrms.entities.concretes.SystemWorker;
 public interface SystemWorkerService {
 
 	DataResult<List<SystemWorker>> getAll();
+	DataResult<List<SystemWorker>> getAll(int pageNo, int pageSize);
 	Result add(SystemWorker systemWorker);
 	
 	DataResult<SystemWorker> getByeMail(String eMail);
