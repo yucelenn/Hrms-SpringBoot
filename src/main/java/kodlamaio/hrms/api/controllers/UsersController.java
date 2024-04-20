@@ -39,4 +39,9 @@ public class UsersController {
 	public DataResult<User> getByeMail(@RequestParam String eMail) {
 		return this.userService.getByeMail(eMail);
 	}
+	
+	@GetMapping("/getAllPageable")
+	public DataResult<List<User>> getAll(int pageNo, int pageSize) {
+		return this.userService.getAll(pageNo, pageSize);
+	}
 }

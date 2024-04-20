@@ -3,6 +3,8 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
@@ -40,6 +42,13 @@ public class UserManager implements UserService {
 	public DataResult<User> getByeMail(String eMail) {
 		
 		return new SuccessDataResult<User>(this.userDao.getByeMail(eMail), "Kullanıcı data'sı listelendi.");
+	}
+
+	@Override
+	public DataResult<List<User>> getAll(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
+		return new SuccessDataResult<List<User>>(this.userDao.findAll(pageable).getContent(), 
+				"Sayfalama ile kullanıcı data'ları listelendi.");
 	}
 
 }

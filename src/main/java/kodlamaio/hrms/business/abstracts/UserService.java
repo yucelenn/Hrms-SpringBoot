@@ -8,7 +8,8 @@ import kodlamaio.hrms.entities.concretes.User;
 
 public interface UserService {
 
-	DataResult<List<User>>  getAll();
+	DataResult<List<User>> getAll();
+	DataResult<List<User>> getAll(int pageNo, int pageSize);
 	Result add(User user);
 	
 	DataResult<User> getByeMail(String eMail);
