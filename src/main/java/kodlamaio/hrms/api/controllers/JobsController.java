@@ -49,4 +49,9 @@ public class JobsController {
 	public DataResult<List<Job>> getByJobTitleContains(@RequestParam String jobTitle) {
 		return this.jobService.getByJobTitleContains(jobTitle);
 	}
+	
+	@GetMapping("/getAllPageable")
+	public DataResult<List<Job>> getAll(int pageNo, int pageSize) {
+		return this.jobService.getAll(pageNo, pageSize);
+	}
 }

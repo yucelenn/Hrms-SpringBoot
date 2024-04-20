@@ -3,6 +3,8 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobService;
@@ -60,6 +62,13 @@ public class JobManager implements JobService {
 	public DataResult<List<Job>> getByJobTitleContains(String jobTitle) {
 		
 		return new SuccessDataResult<List<Job>>(this.jobDao.getByJobTitleContains(jobTitle), "İş ünvanları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Job>> getAll(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
+		return new SuccessDataResult<List<Job>>(this.jobDao.findAll(pageable).getContent(), 
+				"Sayfalama ile kullanıcı data'ları listelendi.");
 	}
 
 }
