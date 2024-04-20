@@ -64,4 +64,9 @@ public class EmployersController {
 	public DataResult<List<Employer>> getByCompanyNameContains(@RequestParam String companyName) {
 		return this.employerService.getByCompanyNameContains(companyName);
 	}
+	
+	@GetMapping("/getAllPageable")
+	public DataResult<List<Employer>> getAll(int pageNo, int pageSize) {
+		return this.employerService.getAll(pageNo, pageSize);
+	}
 }

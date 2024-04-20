@@ -9,6 +9,7 @@ import kodlamaio.hrms.entities.concretes.Employer;
 public interface EmployerService {
 
 	DataResult<List<Employer>> getAll();
+	DataResult<List<Employer>> getAll(int pageNo, int pageSize);
 	Result add(Employer employer);
 	
 	DataResult<Employer> getByeMail(String eMail);
