@@ -79,4 +79,9 @@ public class CandidatesController {
 	public DataResult<List<Candidate>> getByLastNameStartsWith(@RequestParam String lastName) {
 		return this.candidateService.getByLastNameStartsWith(lastName);
 	}
+	
+	@GetMapping("/getAllPageable")
+	public DataResult<List<Candidate>> getAll(int pageNo, int pageSize) {
+		return this.candidateService.getAll(pageNo, pageSize);
+	}
 }
