@@ -14,6 +14,8 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getAllSortedByNameDesc();
 	DataResult<List<Candidate>> getAllSortedByLastNameAsc();
 	DataResult<List<Candidate>> getAllSortedByLastNameDesc();
+	DataResult<List<Candidate>> getAllSortedByBirthYearAsc();
+	DataResult<List<Candidate>> getAllSortedByBirthYearDesc();
 	Result add(Candidate candidate);
 	DataResult<Candidate> getByIdentityNumber(String identityNumber);
 	DataResult<Candidate> getByeMail(String eMail);

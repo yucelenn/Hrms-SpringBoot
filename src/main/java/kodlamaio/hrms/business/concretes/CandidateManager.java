@@ -144,5 +144,19 @@ public class CandidateManager implements CandidateService {
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(sort), 
 				"Ters alfabetik soyisim sıralama ile iş arayan data'ları listelendi.");
 	}
+	
+	@Override
+	public DataResult<List<Candidate>> getAllSortedByBirthYearAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "birthYear");
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(sort), 
+				"Doğum yılı artan sıralama ile iş arayan data'ları listelendi.");
+	}
+	
+	@Override
+	public DataResult<List<Candidate>> getAllSortedByBirthYearDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "birthYear");
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(sort), 
+				"Doğum yılı azalan sıralama ile iş arayan data'ları listelendi.");
+	}
 
 }

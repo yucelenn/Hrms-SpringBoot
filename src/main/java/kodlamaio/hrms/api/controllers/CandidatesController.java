@@ -104,4 +104,14 @@ public class CandidatesController {
 	public DataResult<List<Candidate>> getAllSortedByLastNameDesc() {
 		return this.candidateService.getAllSortedByLastNameDesc();
 	}
+	
+	@GetMapping("/getAllSortedByBirthYearAsc")
+	public DataResult<List<Candidate>> getAllSortedByBirthYearAsc() {
+		return this.candidateService.getAllSortedByBirthYearAsc();
+	}
+	
+	@GetMapping("/getAllSortedByBirthYearDesc")
+	public DataResult<List<Candidate>> getAllSortedByBirthYearDesc() {
+		return this.candidateService.getAllSortedByBirthYearDesc();
+	}
 }
