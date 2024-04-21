@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
@@ -95,6 +96,20 @@ public class EmployerManager implements EmployerService{
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
 		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(pageable).getContent(), 
 				"Sayfalama ile kullanıcı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Employer>> getAllSortedByCompanyNameAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "companyName");
+		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(sort), 
+				"Alfabetik isim sıralama ile iş veren data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Employer>> getAllSortedByCompanyNameDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "companyName");
+		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(sort), 
+				"Ters alfabetik isim sıralama ile iş veren data'ları listelendi.");
 	}
 
 }

@@ -10,6 +10,8 @@ public interface EmployerService {
 
 	DataResult<List<Employer>> getAll();
 	DataResult<List<Employer>> getAll(int pageNo, int pageSize);
+	DataResult<List<Employer>> getAllSortedByCompanyNameAsc();
+	DataResult<List<Employer>> getAllSortedByCompanyNameDesc();
 	Result add(Employer employer);
 	
 	DataResult<Employer> getByeMail(String eMail);

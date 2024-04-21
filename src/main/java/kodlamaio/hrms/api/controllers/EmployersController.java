@@ -69,4 +69,14 @@ public class EmployersController {
 	public DataResult<List<Employer>> getAll(int pageNo, int pageSize) {
 		return this.employerService.getAll(pageNo, pageSize);
 	}
+	
+	@GetMapping("/getAllSortedByCompanyNameAsc")
+	public DataResult<List<Employer>> getAllSortedByCompanyNameAsc() {
+		return this.employerService.getAllSortedByCompanyNameAsc();
+	}
+	
+	@GetMapping("/getAllSortedByCompanyNameDesc")
+	public DataResult<List<Employer>> getAllSortedByCompanyNameDesc() {
+		return this.employerService.getAllSortedByCompanyNameDesc();
+	}
 }
