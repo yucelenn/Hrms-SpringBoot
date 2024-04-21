@@ -135,7 +135,14 @@ public class CandidateManager implements CandidateService {
 	public DataResult<List<Candidate>> getAllSortedByLastNameAsc() {
 		Sort sort = Sort.by(Sort.Direction.ASC, "lastName");
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(sort), 
-				"Alfabetik isim sıralama ile iş arayan data'ları listelendi.");
+				"Alfabetik soyisim sıralama ile iş arayan data'ları listelendi.");
+	}
+	
+	@Override
+	public DataResult<List<Candidate>> getAllSortedByLastNameDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "lastName");
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(sort), 
+				"Ters alfabetik soyisim sıralama ile iş arayan data'ları listelendi.");
 	}
 
 }
