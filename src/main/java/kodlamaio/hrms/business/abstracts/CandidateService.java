@@ -10,6 +10,7 @@ public interface CandidateService {
 
 	DataResult<List<Candidate>> getAll();
 	DataResult<List<Candidate>> getAll(int pageNo, int pageSize);
+	DataResult<List<Candidate>> getAllSortedByNameAsc();
 	Result add(Candidate candidate);
 	DataResult<Candidate> getByIdentityNumber(String identityNumber);
 	DataResult<Candidate> getByeMail(String eMail);

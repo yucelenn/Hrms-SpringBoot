@@ -84,4 +84,9 @@ public class CandidatesController {
 	public DataResult<List<Candidate>> getAll(int pageNo, int pageSize) {
 		return this.candidateService.getAll(pageNo, pageSize);
 	}
+	
+	@GetMapping("/getAllSortedByNameAsc")
+	public DataResult<List<Candidate>> getAllSortedByNameAsc() {
+		return this.candidateService.getAllSortedByNameAsc();
+	}
 }
