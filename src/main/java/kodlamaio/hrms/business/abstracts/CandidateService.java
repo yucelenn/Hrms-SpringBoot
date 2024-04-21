@@ -12,6 +12,7 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getAll(int pageNo, int pageSize);
 	DataResult<List<Candidate>> getAllSortedByNameAsc();
 	DataResult<List<Candidate>> getAllSortedByNameDesc();
+	DataResult<List<Candidate>> getAllSortedByLastNameAsc();
 	Result add(Candidate candidate);
 	DataResult<Candidate> getByIdentityNumber(String identityNumber);
 	DataResult<Candidate> getByeMail(String eMail);
