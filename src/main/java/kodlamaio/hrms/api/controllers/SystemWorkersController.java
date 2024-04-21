@@ -74,4 +74,14 @@ public class SystemWorkersController {
 	public DataResult<List<SystemWorker>> getAllSortedByNameDesc() {
 		return this.systemWorkerService.getAllSortedByNameDesc();
 	}
+	
+	@GetMapping("/getAllSortedByLastNameAsc")
+	public DataResult<List<SystemWorker>> getAllSortedByLastNameAsc() {
+		return this.systemWorkerService.getAllSortedByLastNameAsc();
+	}
+	
+	@GetMapping("/getAllSortedByLastNameDesc")
+	public DataResult<List<SystemWorker>> getAllSortedByLastNameDesc() {
+		return this.systemWorkerService.getAllSortedByLastNameDesc();
+	}
 }

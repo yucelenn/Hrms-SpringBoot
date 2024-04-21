@@ -35,7 +35,7 @@ public class SystemWorkerManager implements SystemWorkerService{
 	@Override
 	public Result add(SystemWorker systemWorker) {
 		this.systemWorkerDao.save(systemWorker);
-		return new SuccessResult("Sistem personeli eklendi.");
+		return new SuccessResult("Sistem çalışanı eklendi.");
 	}
 
 	@Override
@@ -92,6 +92,20 @@ public class SystemWorkerManager implements SystemWorkerService{
 		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
 		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(sort), 
 				"Ters alfabetik isim sıralama ile sistem çalışanı data'ları listelendi.");
+	}
+	
+	@Override
+	public DataResult<List<SystemWorker>> getAllSortedByLastNameAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "lastName");
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(sort), 
+				"Alfabetik soyisim sıralama ile sistem çalışanı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<SystemWorker>> getAllSortedByLastNameDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "lastName");
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(sort), 
+				"Ters alfabetik soyisim sıralama ile sistem çalışanı data'ları listelendi.");
 	}
 
 }
