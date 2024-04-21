@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.SystemWorkerService;
@@ -77,6 +78,20 @@ public class SystemWorkerManager implements SystemWorkerService{
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
 		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(pageable).getContent(), 
 				"Sayfalama ile sistem çalışanı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<SystemWorker>> getAllSortedByNameAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(sort), 
+				"Alfabetik isim sıralama ile sistem çalışanı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<SystemWorker>> getAllSortedByNameDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
+		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.findAll(sort), 
+				"Ters alfabetik isim sıralama ile sistem çalışanı data'ları listelendi.");
 	}
 
 }

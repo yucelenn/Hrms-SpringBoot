@@ -10,6 +10,8 @@ public interface SystemWorkerService {
 
 	DataResult<List<SystemWorker>> getAll();
 	DataResult<List<SystemWorker>> getAll(int pageNo, int pageSize);
+	DataResult<List<SystemWorker>> getAllSortedByNameAsc();
+	DataResult<List<SystemWorker>> getAllSortedByNameDesc();
 	Result add(SystemWorker systemWorker);
 	
 	DataResult<SystemWorker> getByeMail(String eMail);

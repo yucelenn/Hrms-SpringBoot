@@ -64,4 +64,14 @@ public class SystemWorkersController {
 	public DataResult<List<SystemWorker>> getAll(int pageNo, int pageSize) {
 		return this.systemWorkerService.getAll(pageNo, pageSize);
 	}
+	
+	@GetMapping("/getAllSortedByNameAsc")
+	public DataResult<List<SystemWorker>> getAllSortedByNameAsc() {
+		return this.systemWorkerService.getAllSortedByNameAsc();
+	}
+	
+	@GetMapping("/getAllSortedByNameDesc")
+	public DataResult<List<SystemWorker>> getAllSortedByNameDesc() {
+		return this.systemWorkerService.getAllSortedByNameDesc();
+	}
 }
