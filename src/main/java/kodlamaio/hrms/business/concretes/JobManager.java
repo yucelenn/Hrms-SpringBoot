@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobService;
@@ -69,6 +70,20 @@ public class JobManager implements JobService {
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
 		return new SuccessDataResult<List<Job>>(this.jobDao.findAll(pageable).getContent(), 
 				"Sayfalama ile kullanıcı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Job>> getAllSortedByJobTitleAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "jobTitle");
+		return new SuccessDataResult<List<Job>>(this.jobDao.findAll(sort), 
+				"Alfabetik isim sıralama ile iş ünvanı data'ları listelendi.");
+	}
+
+	@Override
+	public DataResult<List<Job>> getAllSortedByJobTitleDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "jobTitle");
+		return new SuccessDataResult<List<Job>>(this.jobDao.findAll(sort), 
+				"Ters alfabetik isim sıralama ile iş ünvanı data'ları listelendi.");
 	}
 
 }

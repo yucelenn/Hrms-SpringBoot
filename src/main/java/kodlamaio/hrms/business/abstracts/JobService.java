@@ -9,6 +9,8 @@ import kodlamaio.hrms.entities.concretes.Job;
 public interface JobService {
 	DataResult<List<Job>>  getAll();
 	DataResult<List<Job>> getAll(int pageNo, int pageSize);
+	DataResult<List<Job>> getAllSortedByJobTitleAsc();
+	DataResult<List<Job>> getAllSortedByJobTitleDesc();
 	Result add(Job job);
 	
 	DataResult<Job> getByJobTitle(String jobTitle);

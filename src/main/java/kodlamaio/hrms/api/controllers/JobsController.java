@@ -54,4 +54,14 @@ public class JobsController {
 	public DataResult<List<Job>> getAll(int pageNo, int pageSize) {
 		return this.jobService.getAll(pageNo, pageSize);
 	}
+	
+	@GetMapping("/getAllSortedByJobTitleAsc")
+	public DataResult<List<Job>> getAllSortedByJobTitleAsc() {
+		return this.jobService.getAllSortedByJobTitleAsc();
+	}
+	
+	@GetMapping("/getAllSortedByJobTitleDesc")
+	public DataResult<List<Job>> getAllSortedByJobTitleDesc() {
+		return this.jobService.getAllSortedByJobTitleDesc();
+	}
 }
