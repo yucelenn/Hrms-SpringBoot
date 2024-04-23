@@ -12,6 +12,7 @@ import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.business.abstracts.checkServices.CandidateCheckService;
 import kodlamaio.hrms.business.abstracts.validationServices.MailValidationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -58,8 +59,12 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<Candidate> getByeMail(String eMail) {
-		
-		return new SuccessDataResult<Candidate>(this.candidateDao.getByeMail(eMail), "İş arayan data'sı listelendi.");
+		if (this.candidateDao.getByeMail(eMail) != null) {
+			return new SuccessDataResult<Candidate>(this.candidateDao.getByeMail(eMail), "İş arayan data'sı listelendi.");
+		}
+		else {
+			return new ErrorDataResult<Candidate>(this.candidateDao.getByeMail(eMail), "İş arayan bulunamadı.");
+		}
 	}
 
 	@Override
@@ -161,6 +166,9 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<Candidate> findByeMail(String eMail) {
+		if (this.candidateDao.findByeMail(eMail)!= null) {
+			return new ErrorDataResult<Candidate>("Girdiğiniz E mail Kullanımda");
+		}
 		return new SuccessDataResult<Candidate>(this.candidateDao.findByeMail(eMail), "İş arayan data'sı listelendi.");
 	}
 
