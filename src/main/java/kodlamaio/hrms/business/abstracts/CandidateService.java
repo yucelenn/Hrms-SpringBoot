@@ -26,4 +26,5 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getByLastNameContains(String lastName);
 	DataResult<List<Candidate>> getByFirstNameStartsWith(String firstName);
 	DataResult<List<Candidate>> getByLastNameStartsWith(String lastName);
+	DataResult<Candidate> findByeMail(String eMail);
 }

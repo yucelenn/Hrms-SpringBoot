@@ -114,4 +114,9 @@ public class CandidatesController {
 	public DataResult<List<Candidate>> getAllSortedByBirthYearDesc() {
 		return this.candidateService.getAllSortedByBirthYearDesc();
 	}
+	
+	@GetMapping("/findByeMail")
+	public DataResult<Candidate> findByeMail(String eMail) {
+		return this.candidateService.findByeMail(eMail);
+	}
 }

@@ -159,4 +159,9 @@ public class CandidateManager implements CandidateService {
 				"Doğum yılı azalan sıralama ile iş arayan data'ları listelendi.");
 	}
 
+	@Override
+	public DataResult<Candidate> findByeMail(String eMail) {
+		return new SuccessDataResult<Candidate>(this.candidateDao.findByeMail(eMail), "İş arayan data'sı listelendi.");
+	}
+
 }
