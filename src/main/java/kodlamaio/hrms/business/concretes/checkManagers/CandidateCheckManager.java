@@ -36,8 +36,12 @@ public class CandidateCheckManager implements CandidateCheckService{
 
 	@Override
 	public boolean checkIdentityNumberIsUnique(String identityNumber) {
-		// bu metodu jpa ile doldur
-		return true;
+		if (candidateDao.getByIdentityNumber(identityNumber) != null) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	@Override
@@ -71,9 +75,9 @@ public class CandidateCheckManager implements CandidateCheckService{
 			if ( !(mernisVerification.checkIfRealPerson(candidate)) ) { //mernis doğrulaması false ise
 				return new ErrorResult("İş arayan eklenemedi, Bilgileriniz Mernis sistemi ile uyuşmuyor!"); 
 			}
-			else if ( !(this.checkMailIsUnique(candidate.getEMail()))  ) { //mail daha önce kullanılmışsa
-				return new ErrorResult("İş arayan eklenemedi, Bu e posta daha önce kullanılmış!!");
-			}
+			//else if ( !(this.checkMailIsUnique(candidate.getEMail()))  ) { //mail daha önce kullanılmışsa
+			//	return new ErrorResult("İş arayan eklenemedi, Bu e posta daha önce kullanılmış!!");
+			//}
 			else if ( !(checkIdentityNumberIsUnique(candidate.getIdentityNumber())) ) { //tc no daha önce kullanılmışsa
 				return new ErrorResult("İş arayan eklenemedi, Bu Tc kimlik numarası daha önce kullanılmış!");
 			}
