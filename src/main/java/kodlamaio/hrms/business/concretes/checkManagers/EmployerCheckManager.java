@@ -72,7 +72,7 @@ public class EmployerCheckManager implements EmployerCheckService{
 			}
 		} 
 		else {
-			return checkInformationsFulfilled(employer);
+			return new ErrorResult(checkInformationsFulfilled(employer).getMessage()); //eksik bilgi girilmişse
 		}	
 	}
 
