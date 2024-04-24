@@ -12,6 +12,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.business.abstracts.checkServices.EmployerCheckService;
 import kodlamaio.hrms.business.abstracts.validationServices.MailValidationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -57,8 +58,12 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<Employer> getByeMail(String eMail) {
-
-		return new SuccessDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren data'sı listelendi.");
+		if (this.employerDao.getByeMail(eMail) != null) {
+			return new SuccessDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren data'sı listelendi.");
+		}
+		else {
+			return new ErrorDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren bulunamadı.");
+		}
 	}
 
 	@Override
