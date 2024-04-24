@@ -23,11 +23,15 @@ public class CandidateCheckManager implements CandidateCheckService{
 		this.candidateDao = candidateDao;
 		this.mernisVerification = mernisVerification;
 	}
-
+	
 	@Override
 	public boolean checkMailIsUnique(String eMail) {
-		// bu metodu jpa ile doldur
-		return true;
+		if (candidateDao.findByeMail(eMail) != null) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	@Override
@@ -63,12 +67,12 @@ public class CandidateCheckManager implements CandidateCheckService{
 	
 	@Override
 	public Result isValidCandidate(Candidate candidate) {
-		if (checkInformationsFulfilled(candidate).isSuccess()) {
+		if (checkInformationsFulfilled(candidate).isSuccess()) { //bilgiler tam girilmişse
 			if ( !(mernisVerification.checkIfRealPerson(candidate)) ) { //mernis doğrulaması false ise
 				return new ErrorResult("İş arayan eklenemedi, Bilgileriniz Mernis sistemi ile uyuşmuyor!"); 
 			}
-			else if ( !(checkMailIsUnique(candidate.getEMail())) ) { //mail daha önce kullanılmışsa
-				return new ErrorResult("İş arayan eklenemedi, Bu e posta daha önce kullanılmış!");
+			else if ( !(this.checkMailIsUnique(candidate.getEMail()))  ) { //mail daha önce kullanılmışsa
+				return new ErrorResult("İş arayan eklenemedi, Bu e posta daha önce kullanılmış!!");
 			}
 			else if ( !(checkIdentityNumberIsUnique(candidate.getIdentityNumber())) ) { //tc no daha önce kullanılmışsa
 				return new ErrorResult("İş arayan eklenemedi, Bu Tc kimlik numarası daha önce kullanılmış!");
@@ -78,7 +82,7 @@ public class CandidateCheckManager implements CandidateCheckService{
 			}
 		}
 		else {
-			return checkInformationsFulfilled(candidate);
+			return new ErrorResult(checkInformationsFulfilled(candidate).getMessage()); //eksik bilgi girilmişse
 		}
 		
 	}
