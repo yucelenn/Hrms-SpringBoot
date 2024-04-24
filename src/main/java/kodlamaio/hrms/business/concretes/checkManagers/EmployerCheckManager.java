@@ -1,20 +1,32 @@
 package kodlamaio.hrms.business.concretes.checkManagers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.checkServices.EmployerCheckService;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
+import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 
 @Service
 public class EmployerCheckManager implements EmployerCheckService{
+	private EmployerDao employerDao;
+
+	@Autowired
+	public EmployerCheckManager(EmployerDao employerDao) {
+		super();
+		this.employerDao = employerDao;
+	}
 
 	@Override
 	public boolean checkMailIsUnique(String eMail) {
-		// bu metodu doldur jpa ile
-		return true;
+		if (employerDao.getByeMail(eMail) != null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override
