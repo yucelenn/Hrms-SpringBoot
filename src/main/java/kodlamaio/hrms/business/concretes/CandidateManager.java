@@ -67,7 +67,7 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public DataResult<List<Candidate>> getByFirstName(String firstName) {
 		if (this.candidateDao.getByFirstName(firstName).isEmpty()) {
-			return new ErrorDataResult<List<Candidate>>("Bu isimde bir iş arayan yok.");
+			return new ErrorDataResult<List<Candidate>>(firstName + " isimli bir iş arayan yok.");
 		} else {
 			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstName(firstName), "İş arayan data'ları listelendi.");
 		}
@@ -76,7 +76,7 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public DataResult<List<Candidate>> getByLastName(String lastName) {
 		if (this.candidateDao.getByLastName(lastName).isEmpty()) {
-			return new ErrorDataResult<List<Candidate>>("Bu soy isimli herhangi bir iş arayan yok.");
+			return new ErrorDataResult<List<Candidate>>(lastName + " soy isimli bir iş arayan yok.");
 		} else {
 			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastName(lastName), "İş arayan data'ları listelendi.");
 		}
@@ -93,7 +93,11 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<List<Candidate>> getByBirthYear(String birthYear) {
-		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByBirthYear(birthYear), "İş arayan data'ları listelendi.");
+		if (this.candidateDao.getByBirthYear(birthYear).isEmpty()) {
+			return new ErrorDataResult<List<Candidate>>("Doğum yılı " + birthYear + " olan herhangi bir iş arayan yok.");
+		} else {
+			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByBirthYear(birthYear), "İş arayan data'ları listelendi.");
+		}
 	}
 
 	@Override
