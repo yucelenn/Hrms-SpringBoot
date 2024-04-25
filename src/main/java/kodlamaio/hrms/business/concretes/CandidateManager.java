@@ -36,8 +36,7 @@ public class CandidateManager implements CandidateService {
 	}
 
 	@Override
-	public DataResult<List<Candidate>> getAll() {
-		
+	public DataResult<List<Candidate>> getAll() {	
 		return new SuccessDataResult<List<Candidate>>(candidateDao.findAll(), "Data listelendi.");
 	}
 
@@ -48,12 +47,10 @@ public class CandidateManager implements CandidateService {
 			if (validationService.validateMail(candidate.getEMail())) { // doğrulama e postasına tıklandıysa gir
 				this.candidateDao.save(candidate);
 				return new SuccessResult(checkService.isValidCandidate(candidate).getMessage());
-			}
-			else {
+			} else {
 				return new ErrorResult("İş arayan eklenemedi, Eposta ile doğrulama gerekiyor!");
 			}		
-		}
-		else {
+		} else {
 			return new ErrorResult(checkService.isValidCandidate(candidate).getMessage());
 		}
 	}
@@ -74,7 +71,12 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<List<Candidate>> getByLastName(String lastName) {
-		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastName(lastName), "İş arayan data'ları listelendi.");
+		if (this.candidateDao.getByLastName(lastName).isEmpty()) {
+			return new ErrorDataResult<List<Candidate>>("Bu soy isimli herhangi bir iş arayan yok.");
+
+		} else {
+			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastName(lastName), "İş arayan data'ları listelendi.");
+		}
 	}
 
 	@Override
