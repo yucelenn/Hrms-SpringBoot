@@ -66,14 +66,17 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<List<Candidate>> getByFirstName(String firstName) {
-		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstName(firstName), "İş arayan data'ları listelendi.");
+		if (this.candidateDao.getByFirstName(firstName).isEmpty()) {
+			return new ErrorDataResult<List<Candidate>>("Bu isimde bir iş arayan yok.");
+		} else {
+			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstName(firstName), "İş arayan data'ları listelendi.");
+		}
 	}
 
 	@Override
 	public DataResult<List<Candidate>> getByLastName(String lastName) {
 		if (this.candidateDao.getByLastName(lastName).isEmpty()) {
 			return new ErrorDataResult<List<Candidate>>("Bu soy isimli herhangi bir iş arayan yok.");
-
 		} else {
 			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastName(lastName), "İş arayan data'ları listelendi.");
 		}
