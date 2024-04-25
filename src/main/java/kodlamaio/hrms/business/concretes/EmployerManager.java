@@ -101,8 +101,11 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<List<Employer>> getByCompanyNameContains(String companyName) {
-		
-		return new SuccessDataResult<List<Employer>>(this.employerDao.getByCompanyNameContains(companyName), "İş veren data'ları listelendi.");
+		if (this.employerDao.getByCompanyNameContains(companyName).isEmpty()) {
+			return new ErrorDataResult<List<Employer>>("Şirket ismi '" + companyName + "' içeren iş veren bulunamadı.");
+		} else {
+			return new SuccessDataResult<List<Employer>>(this.employerDao.getByCompanyNameContains(companyName), "İş veren data'ları listelendi.");
+		}
 	}
 
 	@Override
