@@ -120,8 +120,11 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<List<Candidate>> getByFirstNameStartsWith(String firstName) {
-		
-		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameStartsWith(firstName), "İş arayan data'ları listelendi.");
+		if (this.candidateDao.getByFirstNameStartsWith(firstName).isEmpty()) {
+			return new ErrorDataResult<List<Candidate>>("İsmi '" + firstName + "' ile başlayan bir iş arayan yok.");
+		} else {
+			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameStartsWith(firstName), "İş arayan data'ları listelendi.");
+		}
 	}
 
 	@Override
