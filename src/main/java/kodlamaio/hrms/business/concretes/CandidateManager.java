@@ -62,45 +62,42 @@ public class CandidateManager implements CandidateService {
 	public DataResult<Candidate> getByeMail(String eMail) {
 		if (this.candidateDao.getByeMail(eMail) != null) {
 			return new SuccessDataResult<Candidate>(this.candidateDao.getByeMail(eMail), "İş arayan data'sı listelendi.");
-		}
-		else {
+		} else {
 			return new ErrorDataResult<Candidate>(this.candidateDao.getByeMail(eMail), "İş arayan bulunamadı.");
 		}
 	}
 
 	@Override
 	public DataResult<List<Candidate>> getByFirstName(String firstName) {
-
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstName(firstName), "İş arayan data'ları listelendi.");
 	}
 
 	@Override
 	public DataResult<List<Candidate>> getByLastName(String lastName) {
-
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastName(lastName), "İş arayan data'ları listelendi.");
 	}
 
 	@Override
 	public DataResult<Candidate> getByIdentityNumber(String identityNumber) {
-		
-		return new SuccessDataResult<Candidate>(this.candidateDao.getByIdentityNumber(identityNumber), "İş arayan data'sı listelendi.");
+		if (this.candidateDao.getByIdentityNumber(identityNumber) != null) {
+			return new SuccessDataResult<Candidate>(this.candidateDao.getByIdentityNumber(identityNumber), "İş arayan data'sı listelendi.");
+		} else {
+			return new ErrorDataResult<Candidate>("İş arayan bulunamadı.");
+		}
 	}
 
 	@Override
 	public DataResult<List<Candidate>> getByBirthYear(String birthYear) {
-
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByBirthYear(birthYear), "İş arayan data'ları listelendi.");
 	}
 
 	@Override
 	public DataResult<List<Candidate>> getByFirstNameContains(String firstName) {
-		
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameContains(firstName), "İş arayan data'ları listelendi.");
 	}
 
 	@Override
 	public DataResult<List<Candidate>> getByLastNameContains(String lastName) {
-		
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByLastNameContains(lastName), "İş arayan data'ları listelendi.");
 	}
 
