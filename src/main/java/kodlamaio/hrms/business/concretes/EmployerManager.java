@@ -83,8 +83,11 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<Employer> getByPhoneNumber(String phoneNumber) {
-		
-		return new SuccessDataResult<Employer>(this.employerDao.getByPhoneNumber(phoneNumber), "İş veren data'sı listelendi.");
+		if (this.employerDao.getByPhoneNumber(phoneNumber) == null) {
+			return new ErrorDataResult<Employer>("Telefon numarası '" + phoneNumber + "' olan iş veren bulunamadı.");
+		} else {
+			return new SuccessDataResult<Employer>(this.employerDao.getByPhoneNumber(phoneNumber), "İş veren data'sı listelendi.");
+		}
 	}
 
 	@Override
