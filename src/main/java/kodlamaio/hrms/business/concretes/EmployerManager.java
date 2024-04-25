@@ -92,8 +92,11 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<List<Employer>> getByCompanyNameStartsWith(String companyName) {
-		
-		return new SuccessDataResult<List<Employer>>(this.employerDao.getByCompanyNameStartsWith(companyName), "İş veren data'ları listelendi.");
+		if (this.employerDao.getByCompanyNameStartsWith(companyName).isEmpty()) {
+			return new ErrorDataResult<List<Employer>>("Şirket ismi '" + companyName + "' ile başlayan iş veren bulunamadı.");
+		} else {
+			return new SuccessDataResult<List<Employer>>(this.employerDao.getByCompanyNameStartsWith(companyName), "İş veren data'ları listelendi.");
+		}
 	}
 
 	@Override
