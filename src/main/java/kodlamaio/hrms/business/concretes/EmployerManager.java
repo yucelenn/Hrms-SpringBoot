@@ -46,12 +46,10 @@ public class EmployerManager implements EmployerService{
 			if ( validationService.validateMail(employer.getEMail()) ) {
 				this.employerDao.save(employer);
 				return checkService.isValidEmployer(employer);
-			}
-			else {
+			} else {
 				return new ErrorResult("İş veren eklenemedi, Eposta ile doğrulama gerekiyor!");
 			}
-		}
-		else {
+		} else {
 			return checkService.isValidEmployer(employer);
 		}
 	}
@@ -60,16 +58,18 @@ public class EmployerManager implements EmployerService{
 	public DataResult<Employer> getByeMail(String eMail) {
 		if (this.employerDao.getByeMail(eMail) != null) {
 			return new SuccessDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren data'sı listelendi.");
-		}
-		else {
+		} else {
 			return new ErrorDataResult<Employer>(this.employerDao.getByeMail(eMail), "İş veren bulunamadı.");
 		}
 	}
 
 	@Override
 	public DataResult<Employer> getByCompanyName(String companyName) {
-		
-		return new SuccessDataResult<Employer>(this.employerDao.getByCompanyName(companyName), "İş veren data'sı listelendi.");
+		if (this.employerDao.getByCompanyName(companyName) == null) {
+			return new ErrorDataResult<Employer>(companyName + " isminde iş veren bulunamadı.");
+		} else {
+			return new SuccessDataResult<Employer>(this.employerDao.getByCompanyName(companyName), "İş veren data'sı listelendi.");
+		}
 	}
 
 	@Override
