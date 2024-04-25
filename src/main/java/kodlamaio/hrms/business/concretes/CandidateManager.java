@@ -102,7 +102,11 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<List<Candidate>> getByFirstNameContains(String firstName) {
-		return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameContains(firstName), "İş arayan data'ları listelendi.");
+		if (this.candidateDao.getByFirstNameContains(firstName).isEmpty()) {
+			return new ErrorDataResult<List<Candidate>>("İsminde '" + firstName + "' içeren bir iş arayan yok.");
+		} else {
+			return new SuccessDataResult<List<Candidate>>(this.candidateDao.getByFirstNameContains(firstName), "İş arayan data'ları listelendi.");
+		}
 	}
 
 	@Override
