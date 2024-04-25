@@ -74,8 +74,11 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<Employer> getByWebAdress(String webAdress) {
-		// TODO Auto-generated method stub
-		return new SuccessDataResult<Employer>(this.employerDao.getByWebAdress(webAdress), "İş veren data'sı listelendi.");
+		if (this.employerDao.getByWebAdress(webAdress) == null) {
+			return new ErrorDataResult<Employer>("Web adresi '" + webAdress + "' olan iş veren bulunamadı.");
+		} else {
+			return new SuccessDataResult<Employer>(this.employerDao.getByWebAdress(webAdress), "İş veren data'sı listelendi.");
+		}
 	}
 
 	@Override
