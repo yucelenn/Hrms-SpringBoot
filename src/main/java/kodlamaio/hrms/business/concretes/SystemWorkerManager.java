@@ -54,14 +54,18 @@ public class SystemWorkerManager implements SystemWorkerService{
 			return new ErrorDataResult<>("Sistem çalışanı bulunamadı.");
 		} else {
 			return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByFirstName(firstName),
-					"Sistem çalışanı data'ları listelendi.");		}
+					"Sistem çalışanı data'ları listelendi.");		
+		}
 	}
 
 	@Override
 	public DataResult<List<SystemWorker>> getByLastName(String lastName) {
-		
-		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByLastName(lastName),
-				"Sistem çalışanı data'ları listelendi.");
+		if (this.systemWorkerDao.getByLastName(lastName).isEmpty()) {
+			return new ErrorDataResult<>("Sistem çalışanı bulunamadı.");
+		} else {
+			return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByLastName(lastName),
+					"Sistem çalışanı data'ları listelendi.");		
+		}
 	}
 
 	@Override
