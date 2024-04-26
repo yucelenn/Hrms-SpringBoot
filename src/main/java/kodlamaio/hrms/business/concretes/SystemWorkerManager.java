@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.SystemWorkerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -40,9 +41,11 @@ public class SystemWorkerManager implements SystemWorkerService{
 
 	@Override
 	public DataResult<SystemWorker> getByeMail(String eMail) {
-		
-		return new SuccessDataResult<SystemWorker>(this.systemWorkerDao.getByeMail(eMail),
-				"Sistem çalışanı data'sı listelendi.");
+		if (this.systemWorkerDao.getByeMail(eMail) == null) {
+			return new ErrorDataResult<>("Sistem çalışanı bulunamadı.");
+		} else {
+			return new SuccessDataResult<SystemWorker>(this.systemWorkerDao.getByeMail(eMail), "Sistem çalışanı data'sı listelendi.");
+		}
 	}
 
 	@Override
