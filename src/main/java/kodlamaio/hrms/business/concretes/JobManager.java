@@ -65,8 +65,11 @@ public class JobManager implements JobService {
 
 	@Override
 	public DataResult<List<Job>> getByJobTitleContains(String jobTitle) {
-		
-		return new SuccessDataResult<List<Job>>(this.jobDao.getByJobTitleContains(jobTitle), "İş ünvanları listelendi.");
+		if (this.jobDao.getByJobTitleContains(jobTitle).isEmpty()) {
+			return new ErrorDataResult<>("İş ünvanı bulunamadı.");
+		} else {
+			return new SuccessDataResult<List<Job>>(this.jobDao.getByJobTitleContains(jobTitle), "İş ünvanları listelendi.");
+		}
 	}
 
 	@Override
