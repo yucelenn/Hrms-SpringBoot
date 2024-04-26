@@ -70,9 +70,12 @@ public class SystemWorkerManager implements SystemWorkerService{
 
 	@Override
 	public DataResult<List<SystemWorker>> getByFirstNameStartsWith(String firstName) {
-		
-		return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByFirstNameStartsWith(firstName),
-				"Sistem çalışanı data'ları listelendi.");
+		if (this.systemWorkerDao.getByFirstNameStartsWith(firstName).isEmpty()) {
+			return new ErrorDataResult<>("Sistem çalışanı bulunamadı.");
+		} else {
+			return new SuccessDataResult<List<SystemWorker>>(this.systemWorkerDao.getByFirstNameStartsWith(firstName),
+					"Sistem çalışanı data'ları listelendi.");		
+		}
 	}
 
 	@Override
