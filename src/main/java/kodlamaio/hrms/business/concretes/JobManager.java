@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.JobService;
 import kodlamaio.hrms.business.abstracts.checkServices.JobCheckService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobDao;
@@ -39,18 +40,18 @@ public class JobManager implements JobService {
 		if (checkService.isValidJob(job).isSuccess()) {
 			this.jobDao.save(job);
 			return checkService.isValidJob(job);
-		}
-		else {
+		} else {
 			return checkService.isValidJob(job);
 		}
 	}
 
 	@Override
 	public DataResult<Job> getByJobTitle(String jobTitle) {
-		//iş kodlarını buraya döşe
-
-		return new SuccessDataResult<Job>(this.jobDao.getByJobTitle(jobTitle), "Data listelendi.");
-	
+		if (this.jobDao.getByJobTitle(jobTitle) == null) {
+			return new ErrorDataResult<>("İş ünvanı bulunamadı.");
+		} else {
+			return new SuccessDataResult<Job>(this.jobDao.getByJobTitle(jobTitle), "Data listelendi.");
+		}	
 	}
 
 	@Override
