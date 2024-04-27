@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,9 +27,11 @@ public class User {
 	private int id;
 	
 	@Column(name="email")
+	@NotBlank(message = "E posta alanı boş bırakılamaz!")
 	private String eMail;
 	
 	@Column(name="password")
+	@NotBlank(message = "Şifre alanı boş bırakılamaz!")
 	private  String password;
 	
 }
