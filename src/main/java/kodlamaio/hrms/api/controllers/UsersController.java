@@ -54,4 +54,9 @@ public class UsersController {
 	public DataResult<List<User>> getAllSortedByIdDesc() {
 		return this.userService.getAllSortedByIdDesc();
 	}
+	
+	@GetMapping("/getById")
+	public DataResult<User> getById(int id){
+		return this.userService.getById(id);
+	}
 }

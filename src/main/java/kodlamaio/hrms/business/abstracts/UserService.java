@@ -13,6 +13,6 @@ public interface UserService {
 	DataResult<List<User>> getAllSortedByIdAsc();
 	DataResult<List<User>> getAllSortedByIdDesc();
 	Result add(User user);
-	
+	DataResult<User> getById(int id);
 	DataResult<User> getByeMail(String eMail);
 }

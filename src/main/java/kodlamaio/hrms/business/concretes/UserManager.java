@@ -82,4 +82,13 @@ public class UserManager implements UserService, CheckService {
 		return new SuccessDataResult<List<User>>(this.userDao.findAll(sort), 
 				"Id'ye göre ters sıralama ile kullanıcılar listelendi.");
 	}
+	
+	@Override
+	public DataResult<User> getById(int id){
+		if (this.userDao.findById(id).isPresent()) {
+			return new SuccessDataResult<User>(this.userDao.findById(id).get(), "Kullanıcı data'sı listelendi.");
+		} else {
+			return new ErrorDataResult<>("Kullanıcı bulunamadı.");
+		}
+	}
 }
