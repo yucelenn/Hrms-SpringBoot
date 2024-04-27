@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -48,4 +50,17 @@ public class JobAdvertisement {
 	
 	@Column(name = "free_position_amount")
 	private int freePositionAmount;
+	
+	@ManyToOne()
+	@JoinColumn(name = "employer_id")
+	private Employer employer;
+	
+	
+	@ManyToOne()
+	@JoinColumn(name="city_id")
+	private City city;
+	
+	@ManyToOne()
+	@JoinColumn(name = "job_title_id")
+	private Job job;
 }

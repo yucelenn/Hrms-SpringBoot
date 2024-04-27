@@ -30,6 +30,6 @@ public class Job {
 	@NotBlank(message = "İş ünvanı alanı boş bırakılamaz!")
 	private String jobTitle;
 	
-	@OneToMany(mappedBy = "jobPosition")
+	@OneToMany(mappedBy = "job")
 	private List<JobAdvertisement> jobAdvertisements;
 }
