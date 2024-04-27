@@ -44,4 +44,10 @@ public class UsersController {
 	public DataResult<List<User>> getAll(int pageNo, int pageSize) {
 		return this.userService.getAll(pageNo, pageSize);
 	}
+	
+	@GetMapping("/getAllSortedByIdAsc")
+	public DataResult<List<User>> getAllSortedByIdAsc() {
+		return this.userService.getAllSortedByIdAsc();
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
@@ -68,4 +69,11 @@ public class UserManager implements UserService, CheckService {
 		}
 	}
 
+	@Override
+	public DataResult<List<User>> getAllSortedByIdAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "id");
+		return new SuccessDataResult<List<User>>(this.userDao.findAll(sort), 
+				"Id'ye göre sıralama ile kullanıcılar listelendi.");
+	}
+	
 }
