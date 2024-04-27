@@ -76,4 +76,10 @@ public class UserManager implements UserService, CheckService {
 				"Id'ye göre sıralama ile kullanıcılar listelendi.");
 	}
 	
+	@Override
+	public DataResult<List<User>> getAllSortedByIdDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "id");
+		return new SuccessDataResult<List<User>>(this.userDao.findAll(sort), 
+				"Id'ye göre ters sıralama ile kullanıcılar listelendi.");
+	}
 }

@@ -50,4 +50,8 @@ public class UsersController {
 		return this.userService.getAllSortedByIdAsc();
 	}
 	
+	@GetMapping("/getAllSortedByIdDesc")
+	public DataResult<List<User>> getAllSortedByIdDesc() {
+		return this.userService.getAllSortedByIdDesc();
+	}
 }

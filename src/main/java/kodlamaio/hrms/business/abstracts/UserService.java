@@ -11,6 +11,7 @@ public interface UserService {
 	DataResult<List<User>> getAll();
 	DataResult<List<User>> getAll(int pageNo, int pageSize);
 	DataResult<List<User>> getAllSortedByIdAsc();
+	DataResult<List<User>> getAllSortedByIdDesc();
 	Result add(User user);
 	
 	DataResult<User> getByeMail(String eMail);
