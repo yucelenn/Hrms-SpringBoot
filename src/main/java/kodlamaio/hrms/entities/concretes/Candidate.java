@@ -3,6 +3,7 @@ package kodlamaio.hrms.entities.concretes;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,15 +24,19 @@ public class Candidate extends User {
 	private int candidateId;*/
 	
 	@Column(name="first_name")
+	@NotBlank(message = "İsim alanı boş bırakılamaz!")
 	private String firstName;
 	
 	@Column(name="last_name")
+	@NotBlank(message = "Soy isim alanı boş bırakılamaz!")
 	private String lastName;
 	
 	@Column(name="identity_number")
+	@NotBlank(message = "TC kimlik numarası alanı boş bırakılamaz!")
 	private String identityNumber;
 	
 	@Column(name="birth_year")
+	@NotBlank(message = "Doğum yılı alanı boş bırakılamaz!")
 	private String birthYear;
 
 }
