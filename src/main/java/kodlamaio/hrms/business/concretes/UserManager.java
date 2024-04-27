@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
+import kodlamaio.hrms.business.abstracts.checkServices.CheckService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -16,7 +17,7 @@ import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.User;
 
 @Service
-public class UserManager implements UserService {
+public class UserManager implements UserService, CheckService {
 
 	private UserDao userDao; 
 	
@@ -28,7 +29,6 @@ public class UserManager implements UserService {
 
 	@Override
 	public DataResult<List<User>> getAll() {
-	
 		return new SuccessDataResult<List<User>>(this.userDao.findAll(), "Data listelendi.");
 	}
 
@@ -39,8 +39,7 @@ public class UserManager implements UserService {
 	}
 
 	@Override
-	public DataResult<User> getByeMail(String eMail) {
-		
+	public DataResult<User> getByeMail(String eMail) {	
 		return new SuccessDataResult<User>(this.userDao.getByeMail(eMail), "Kullanıcı data'sı listelendi.");
 	}
 
@@ -49,6 +48,15 @@ public class UserManager implements UserService {
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize); //sayfalama için
 		return new SuccessDataResult<List<User>>(this.userDao.findAll(pageable).getContent(), 
 				"Sayfalama ile kullanıcı data'ları listelendi.");
+	}
+
+	@Override
+	public boolean checkMailIsUnique(String eMail) {
+		if (this.getByeMail(eMail) == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
