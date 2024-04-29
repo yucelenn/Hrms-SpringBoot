@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "employee_confirms_employers")
-public class EmployerEmployeeVerification extends EmployeeVerification {
+public class EmployerSystemWorkerVerification extends SystemWorkerVerification {
 
 	@OneToOne
 	@JoinColumn(name="employer_id")
