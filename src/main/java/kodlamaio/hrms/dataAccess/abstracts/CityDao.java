@@ -1,9 +1,5 @@
 package kodlamaio.hrms.dataAccess.abstracts;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+public interface CityDao {
 
-import kodlamaio.hrms.entities.concretes.City;
-
-public interface CityDao extends JpaRepository<City, Integer>{
-	
 }
