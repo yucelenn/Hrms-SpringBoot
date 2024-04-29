@@ -28,7 +28,7 @@ public class SystemWorkerVerification {
 	private int id;
 	
 	@Column(name = "employee_id")
-	private int employeeId;
+	private int systemWorkerId;
 	
 	@Column(name = "is_confirmed")
 	private boolean isConfirmed;
