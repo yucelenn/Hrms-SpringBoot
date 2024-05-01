@@ -7,4 +7,7 @@ public interface EmailVerificationService {
 
 	boolean createCandidateEmailVerificationCode(Candidate candidate);
 	boolean createEmployerEmailVerificationCode(Employer employer);
+	void sendCandidateVerificationEmail(String eMail);
+	void sendEmployerVerificationEmail(String eMail);
+	boolean isVerificationSuccessful(String eMail);
 }
