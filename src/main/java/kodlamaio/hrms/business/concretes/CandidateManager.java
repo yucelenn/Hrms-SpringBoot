@@ -9,8 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.abstracts.EmailVerificationService;
 import kodlamaio.hrms.business.abstracts.checkServices.CandidateCheckService;
-import kodlamaio.hrms.business.abstracts.validationServices.MailValidationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -25,14 +25,14 @@ public class CandidateManager implements CandidateService {
 
 	private CandidateDao candidateDao;
 	private CandidateCheckService checkService;
-	private MailValidationService validationService;
+	private EmailVerificationService verificationService;
 	
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, MailValidationService validationService) {
+	public CandidateManager(CandidateDao candidateDao, CandidateCheckService checkService, EmailVerificationService verificationService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.checkService = checkService;
-		this.validationService = validationService;
+		this.verificationService = verificationService;
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public Result add(Candidate candidate) {
 		if ( checkService.isValidCandidate(candidate).isSuccess() ) { 
-			validationService.sendValidationMail(candidate.getEMail()); // doğrulama için e posta gönder
-			if (validationService.validateMail(candidate.getEMail())) { // doğrulama e postasına tıklandıysa gir
+			verificationService.sendCandidateVerificationEmail(candidate.getEMail());; // doğrulama için e posta gönder
+			if ( verificationService.isVerificationSuccessful(candidate.getEMail()) ) { // doğrulama başarılıysa
 				this.candidateDao.save(candidate);
 				return new SuccessResult(checkService.isValidCandidate(candidate).getMessage());
 			} else {
