@@ -8,9 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.abstracts.EmailVerificationService;
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.business.abstracts.SystemWorkerVerificationService;
 import kodlamaio.hrms.business.abstracts.checkServices.EmployerCheckService;
-import kodlamaio.hrms.business.abstracts.validationServices.MailValidationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -24,14 +25,18 @@ public class EmployerManager implements EmployerService{
 
 	private EmployerDao employerDao;
 	private EmployerCheckService checkService;
-	private MailValidationService validationService; 
+	private EmailVerificationService emailVerificationService; 
+	private SystemWorkerVerificationService systemWorkerVerificationService;
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao, EmployerCheckService checkService, MailValidationService validationService) {
+	public EmployerManager(EmployerDao employerDao, EmployerCheckService checkService,
+			EmailVerificationService emailVerificationService, 
+			SystemWorkerVerificationService systemWorkerVerificationService) {
 		super();
 		this.employerDao = employerDao;
 		this.checkService = checkService;
-		this.validationService = validationService;
+		this.emailVerificationService = emailVerificationService;
+		this.systemWorkerVerificationService = systemWorkerVerificationService;
 	}
 
 	@Override
@@ -42,8 +47,9 @@ public class EmployerManager implements EmployerService{
 	@Override
 	public Result add(Employer employer) {
 		if ( checkService.isValidEmployer(employer).isSuccess() ) {
-			validationService.sendValidationMail(employer.getEMail()); //doğrulama maili gönder
-			if ( validationService.validateMail(employer.getEMail()) ) {
+			emailVerificationService.sendEmployerVerificationEmail(employer.getEMail()); //doğrulama maili gönder
+			if ( emailVerificationService.isVerificationSuccessful(employer.getEMail()) && //doğrulama başarılıysa ve
+					systemWorkerVerificationService.createEmployerSystemWorkerVerification(employer)) {//sistem çalışanı onay verdiyse 
 				this.employerDao.save(employer);
 				return checkService.isValidEmployer(employer);
 			} else {
