@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -31,7 +32,7 @@ public class CandidatesController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Candidate candidate) {
+	public Result add(@Valid @RequestBody Candidate candidate) {
 		return this.candidateService.add(candidate);		
 	}
 	
