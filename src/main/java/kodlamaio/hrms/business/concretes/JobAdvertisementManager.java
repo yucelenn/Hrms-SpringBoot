@@ -65,8 +65,12 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 	@Override
 	public Result updateJobAdvertisementStatus(int jobAdvertisementId) {
-		this.jobAdvertisementDao.updateJobAdvertisementStatus(jobAdvertisementId);
-		return new SuccessResult("İş İlanı Pasif Duruma Getirildi") ;
+		if (this.jobAdvertisementDao.findById(jobAdvertisementId).isPresent()) {
+			this.jobAdvertisementDao.updateJobAdvertisementStatus(jobAdvertisementId);
+			return new SuccessResult("İş İlanı Pasif Duruma Getirildi") ;
+		} else {
+			return new ErrorResult("Girdiğiniz id'ye ait bir ilan bulunmadı.");
+		}
 	}
 
 }
