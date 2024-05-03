@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -33,7 +35,12 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	
 	@Override
 	public DataResult<List<JobAdvertisementDto>> getByCompanyName(String companyName) {
-		return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getByCompanyName(companyName),"Data Listelendi");
+		if (this.jobAdvertisementDao.getByCompanyName(companyName).isEmpty()) {
+			return new ErrorDataResult<>(companyName + " iş verenine ait ilan bulunamadı.");
+		} else {
+			return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getByCompanyName(companyName),
+					companyName+" iş verenine ait ilanlar listelendi");
+		}
 	}
 	
 	@Override
