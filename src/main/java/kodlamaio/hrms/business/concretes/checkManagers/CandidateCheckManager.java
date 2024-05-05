@@ -45,7 +45,7 @@ public class CandidateCheckManager implements CandidateCheckService{
 	}
 
 	@Override
-	public Result checkInformationsFulfilled(Candidate candidate) {
+	public Result checkInformationsFulfilled(Candidate candidate) { //validation sayesinde bu methoda gerek kalmadı.
 		if (candidate.getFirstName().isEmpty()) {
 			return new ErrorResult("Lütfen isminizi giriniz!");
 		}
@@ -71,7 +71,8 @@ public class CandidateCheckManager implements CandidateCheckService{
 	
 	@Override
 	public Result isValidCandidate(Candidate candidate) {
-		if (checkInformationsFulfilled(candidate).isSuccess()) { //bilgiler tam girilmişse
+		//if (checkInformationsFulfilled(candidate).isSuccess()) { //bilgiler tam girilmişse
+		// Valid-NotBlank anotasyonları sayesinde eksik bilgi girişini methodsuz tespit ediyoruz bu if'e gerek kalmadı.
 			if ( !(mernisVerification.checkIfRealPerson(candidate)) ) { //mernis doğrulaması false ise
 				return new ErrorResult("İş arayan eklenemedi, Bilgileriniz Mernis sistemi ile uyuşmuyor!"); 
 			}
@@ -84,11 +85,6 @@ public class CandidateCheckManager implements CandidateCheckService{
 			else {
 				return new SuccessResult("İş arayan eklendi.");  //isterler sağlanıyorsa
 			}
-		}
-		else {
-			return new ErrorResult(checkInformationsFulfilled(candidate).getMessage()); //eksik bilgi girilmişse
-		}
-		
 	}
 
 }
