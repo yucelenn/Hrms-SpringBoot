@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
@@ -52,7 +53,7 @@ public class CandidatesController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<?> add(@RequestBody Candidate candidate) { // HTTP kodları için 200 - 300 - 400 ...
+	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) { // HTTP kodları için 200 - 300 - 400 ...
 		return ResponseEntity.ok(this.candidateService.add(candidate));		
 	}
 	
