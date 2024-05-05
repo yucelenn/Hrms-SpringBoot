@@ -2,6 +2,8 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ public class CandidatesController {
 
 	public CandidateService candidateService;
 	
+	@Autowired
 	public CandidatesController(CandidateService candidateService) {
 		super();
 		this.candidateService = candidateService;
@@ -32,8 +35,8 @@ public class CandidatesController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody Candidate candidate) {
-		return this.candidateService.add(candidate);		
+	public ResponseEntity<?> add(@RequestBody Candidate candidate) { // HTTP kodları için 200 - 300 - 400 ...
+		return ResponseEntity.ok(this.candidateService.add(candidate));		
 	}
 	
 	@GetMapping("/getByeMail")
