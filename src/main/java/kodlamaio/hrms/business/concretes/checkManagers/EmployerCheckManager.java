@@ -37,7 +37,7 @@ public class EmployerCheckManager implements EmployerCheckService{
 	}
 
 	@Override
-	public Result checkInformationsFulfilled(Employer employer) {
+	public Result checkInformationsFulfilled(Employer employer) {//validation sayesinde gerek kalmadı bu methoda
 		if (employer.getCompanyName().isEmpty()) {
 			return new ErrorResult("Lütfen şirket isminizi giriniz!");
 		}
@@ -60,7 +60,8 @@ public class EmployerCheckManager implements EmployerCheckService{
 
 	@Override
 	public Result isValidEmployer(Employer employer) {
-		if (checkInformationsFulfilled(employer).isSuccess()) { //bilgiler eksiksiz girilmişse
+		//if (checkInformationsFulfilled(employer).isSuccess()) { //bilgiler eksiksiz girilmişse
+		// NotBlank-Valid handleValidationException sayesinde gerek kalmadı bu if else'e
 			if ( !(checkMailIsUnique(employer.getEMail())) ) { //mail daha önce kullanılmışsa
 				return new ErrorResult("İş veren eklenemedi, Bu e posta daha önce kullanılmış!");
 			}
@@ -70,10 +71,6 @@ public class EmployerCheckManager implements EmployerCheckService{
 			else {
 				return new SuccessResult("İş veren eklendi."); //isterler sağlanıyorsa
 			}
-		} 
-		else {
-			return new ErrorResult(checkInformationsFulfilled(employer).getMessage()); //eksik bilgi girilmişse
-		}	
 	}
 
 }
