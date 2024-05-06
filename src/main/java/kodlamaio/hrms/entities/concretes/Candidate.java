@@ -8,6 +8,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import kodlamaio.hrms.entities.concretes.cv.EducationInfo;
+import kodlamaio.hrms.entities.concretes.cv.ExperienceInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,5 +46,8 @@ public class Candidate extends User {
 
 	@OneToMany(mappedBy = "candidate" )
 	private List<EducationInfo> educationInfos;
+	
+	@OneToMany(mappedBy = "candidate")
+	private List<ExperienceInfo> experienceInfos;
 	
 }
