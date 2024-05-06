@@ -41,15 +41,13 @@ public class JobCheckManager implements JobCheckService{
 	
 	@Override
 	public Result isValidJob(Job job) {
-		if (checkInformationsFulfilled(job).isSuccess()) { //bilgiler eksiksiz girilmişse
+		//if (checkInformationsFulfilled(job).isSuccess()) { //bilgiler eksiksiz girilmişse
+		//NotBlank-Valid handleValidationException sayesinde gerek kalmadı bu if else'e
 			if ( !(checkJobNameIsUnique(job.getJobTitle())) ) { //iş pozisyonu ismi daha önce kullanılmışsa
 				return new ErrorResult("İş pozisyonu eklenemedi, Bu iş pozisyonu ismi daha önce kullanılmış!");
 			} else {
 				return new SuccessResult("İş pozisyonu eklendi."); //isterler sağlanıyorsa
 			}
-		} else {
-			return checkInformationsFulfilled(job);
-		}
 	}
 
 }
