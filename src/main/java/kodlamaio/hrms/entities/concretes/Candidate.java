@@ -13,6 +13,7 @@ import kodlamaio.hrms.entities.concretes.cv.EducationInfo;
 import kodlamaio.hrms.entities.concretes.cv.ExperienceInfo;
 import kodlamaio.hrms.entities.concretes.cv.Language;
 import kodlamaio.hrms.entities.concretes.cv.Talent;
+import kodlamaio.hrms.entities.concretes.cv.WebAddress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -62,5 +63,8 @@ public class Candidate extends User {
 	
 	@OneToMany(mappedBy = "candidate")
 	private List<Talent> talents;
+	
+	@OneToOne(mappedBy = "candidate")
+	private WebAddress webAddress;
 	
 }
