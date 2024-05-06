@@ -47,7 +47,7 @@ public class EducationInfo {
 	private Date endDate;
 	
 	@ManyToOne()
-	@JoinColumn(name = "job_seeker_id")
+	@JoinColumn(name = "candidate_id")
 	private Candidate candidate;
 	
 }
