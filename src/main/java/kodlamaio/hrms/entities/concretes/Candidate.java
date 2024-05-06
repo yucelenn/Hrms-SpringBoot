@@ -5,8 +5,10 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import kodlamaio.hrms.entities.concretes.cv.CoverLetter;
 import kodlamaio.hrms.entities.concretes.cv.EducationInfo;
 import kodlamaio.hrms.entities.concretes.cv.ExperienceInfo;
 import lombok.AllArgsConstructor;
@@ -49,5 +51,8 @@ public class Candidate extends User {
 	
 	@OneToMany(mappedBy = "candidate")
 	private List<ExperienceInfo> experienceInfos;
+	
+	@OneToOne(mappedBy = "candidate")
+	private CoverLetter coverLetter;	
 	
 }
