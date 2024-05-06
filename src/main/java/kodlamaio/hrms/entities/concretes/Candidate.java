@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotBlank;
 import kodlamaio.hrms.entities.concretes.cv.CoverLetter;
 import kodlamaio.hrms.entities.concretes.cv.EducationInfo;
 import kodlamaio.hrms.entities.concretes.cv.ExperienceInfo;
+import kodlamaio.hrms.entities.concretes.cv.ImageInfo;
 import kodlamaio.hrms.entities.concretes.cv.Language;
 import kodlamaio.hrms.entities.concretes.cv.Talent;
 import kodlamaio.hrms.entities.concretes.cv.WebAddress;
@@ -66,5 +67,8 @@ public class Candidate extends User {
 	
 	@OneToOne(mappedBy = "candidate")
 	private WebAddress webAddress;
+	
+	@OneToMany(mappedBy = "candidate")
+	private List<ImageInfo> imageInfos;
 	
 }
