@@ -30,18 +30,16 @@ public class ImageInfoManager implements ImageInfoService{
 		this.candidateDao = candidateDao;
 	}
 
-
 	@Override
 	public Result add(MultipartFile file, int candidateId) {
 		ImageInfo imageInfo = new ImageInfo();
 		
 		try {
 			String filePath= fileService.uploadFile(file);
-			imageInfo.setCandidate(candidateDao.findById(candidateId).orElseThrow());
+			imageInfo.setCandidate(candidateDao.findById(candidateId).orElseThrow(null));
 			imageInfo.setImageName(FileOperations.getFileName(file));
 			imageInfo.setStorageName(fileService.getFileStorageName());
-			imageInfo.setImagePath(filePath);
-			
+			imageInfo.setImagePath(filePath);	
 			
 		} catch (IOException e) {
 			throw new RuntimeException();
