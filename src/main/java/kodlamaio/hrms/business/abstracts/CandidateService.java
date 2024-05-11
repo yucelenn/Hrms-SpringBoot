@@ -5,6 +5,7 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.concretes.dtos.CandidateDto;
 
 public interface CandidateService {
 
@@ -27,4 +28,5 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getByFirstNameStartsWith(String firstName);
 	DataResult<List<Candidate>> getByLastNameStartsWith(String lastName);
 	DataResult<Candidate> findByeMail(String eMail);
+	DataResult<List<CandidateDto>> getCandidateCvDto();
 }

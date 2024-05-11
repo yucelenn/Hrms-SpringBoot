@@ -19,6 +19,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.concretes.dtos.CandidateDto;
 
 @Service
 public class CandidateManager implements CandidateService {
@@ -192,6 +193,11 @@ public class CandidateManager implements CandidateService {
 		}else {
 			return new SuccessDataResult<Candidate>("İş arayan data'sı listelendi.");
 		}
+	}
+
+	@Override
+	public DataResult<List<CandidateDto>> getCandidateCvDto() {
+		return new SuccessDataResult<List<CandidateDto>>(this.candidateDao.getCandidateCvDto(),"Cv Listelendi");
 	}
 
 }
