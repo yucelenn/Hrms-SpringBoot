@@ -23,6 +23,7 @@ import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.concretes.dtos.CandidateDto;
 
 @RestController
 @RequestMapping("/api/candidates")
@@ -140,5 +141,10 @@ public class CandidatesController {
 	@GetMapping("/findByeMail")
 	public DataResult<Candidate> findByeMail(String eMail) {
 		return this.candidateService.findByeMail(eMail);
+	}
+	
+	@GetMapping("/getCandidateCvDto")
+	public DataResult<List<CandidateDto>> getCandidateCvDto(){		
+		return this.candidateService.getCandidateCvDto();
 	}
 }
