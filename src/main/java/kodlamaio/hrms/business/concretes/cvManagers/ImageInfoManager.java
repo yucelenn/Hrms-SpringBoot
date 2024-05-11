@@ -36,7 +36,7 @@ public class ImageInfoManager implements ImageInfoService{
 		
 		try {
 			String filePath= fileService.uploadFile(file);
-			imageInfo.setCandidate(candidateDao.findById(candidateId).orElseThrow(null));
+			imageInfo.setCandidate(candidateDao.findById(candidateId).orElseThrow());
 			imageInfo.setImageName(FileOperations.getFileName(file));
 			imageInfo.setStorageName(fileService.getFileStorageName());
 			imageInfo.setImagePath(filePath);	
