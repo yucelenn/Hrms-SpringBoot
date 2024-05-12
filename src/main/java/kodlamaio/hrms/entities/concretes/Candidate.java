@@ -2,6 +2,8 @@ package kodlamaio.hrms.entities.concretes;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -26,6 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name="candidates")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","educationInfos","experienceInfos","languages","imageInfos","webAddress","talents","coverLetter"})
 public class Candidate extends User {
 	
 /*
