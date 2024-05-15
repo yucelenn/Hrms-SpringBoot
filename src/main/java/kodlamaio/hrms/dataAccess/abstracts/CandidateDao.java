@@ -20,8 +20,25 @@ public interface CandidateDao extends JpaRepository<Candidate, Integer>{
 	List<Candidate> getByFirstNameStartsWith(String firstName);
 	List<Candidate> getByLastNameStartsWith(String lastName);
 	Candidate findByeMail(String eMail);
-	
-	@Query("SELECT new kodlamaio.hrms.entities.concretes.dtos.CandidateDto(js.id, j.schoolName, j.departmantName, j.degree, j.startDate, j.endDate, je.companyName, je.role, je.startDate, je.endDate, jl.languageName,jl.languageLevel, ji.imagePath, jw.githubLink, jw.linkedinLink, jt.technology, jc.description) FROM Candidate js JOIN js.educationInfos j JOIN js.experienceInfos je JOIN js.languages jl JOIN js.imageInfos ji JOIN js.webAddress jw JOIN js.talents jt JOIN js.coverLetter jc")
+	//c: Candidate,  ed: EducationInfo,  ex: ExperienceInfo,  l: Language,  
+	//i: İmageInfo,  w: WebAddress,  t: Talent,  cl: CoverLetter 
+	@Query("SELECT new kodlamaio.hrms.entities.concretes.dtos.CandidateDto"
+	+ "(c.id,"
+	+ " ed.schoolName, ed.departmantName, ed.degree, ed.startDate, ed.endDate,"
+	+ " ex.companyName, ex.role, ex.startDate, ex.endDate,"
+	+ " l.languageName, l.languageLevel,"
+	+ " i.imagePath,"
+	+ " w.githubLink, w.linkedinLink,"
+	+ " t.technology,"
+	+ " cl.description) "
+	+ "FROM Candidate c "
+	+ "JOIN c.educationInfos ed "
+	+ "JOIN c.experienceInfos ex "
+	+ "JOIN c.languages l "
+	+ "JOIN c.imageInfos i "
+	+ "JOIN c.webAddress w "
+	+ "JOIN c.talents t "
+	+ "JOIN c.coverLetter cl")
 	List<CandidateDto> getCandidateCvDto();
 	
 }
