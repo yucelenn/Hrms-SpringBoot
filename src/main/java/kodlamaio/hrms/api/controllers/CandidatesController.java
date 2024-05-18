@@ -143,8 +143,14 @@ public class CandidatesController {
 		return this.candidateService.findByeMail(eMail);
 	}
 	
-	@GetMapping("/getCandidateCvDto")
+	@GetMapping("/getAllCvs")
 	public DataResult<List<CandidateDto>> getCandidateCvDto(){		
 		return this.candidateService.getCandidateCvDto();
 	}
+	
+	@GetMapping("/getCandidateCv")
+	public DataResult<CandidateDto> getById(int id) {
+		return this.candidateService.getById(id);
+	}
+	
 }

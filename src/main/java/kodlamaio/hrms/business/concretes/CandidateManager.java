@@ -197,7 +197,12 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<List<CandidateDto>> getCandidateCvDto() {
-		return new SuccessDataResult<List<CandidateDto>>(this.candidateDao.getCandidateCvDto(),"Cv Listelendi");
+		return new SuccessDataResult<List<CandidateDto>>(this.candidateDao.getCandidateCvDto(),"Cv'ler Listelendi");
+	}
+
+	@Override
+	public DataResult<CandidateDto> getById(int id) {
+		return new SuccessDataResult<CandidateDto>(this.candidateDao.getById(id),"Cv Listelendi");
 	}
 
 }

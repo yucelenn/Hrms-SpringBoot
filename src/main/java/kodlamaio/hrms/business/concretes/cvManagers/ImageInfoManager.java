@@ -1,21 +1,27 @@
 package kodlamaio.hrms.business.concretes.cvManagers;
 
-import java.io.IOException;
+import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.cvServices.ImageInfoService;
-import kodlamaio.hrms.business.abstracts.storage.FileService;
-import kodlamaio.hrms.business.concretes.storage.FileOperations;
+import kodlamaio.hrms.core.adapters.FileService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.cvDaos.ImageInfoDao;
 import kodlamaio.hrms.entities.concretes.cv.ImageInfo;
+import kodlamaio.hrms.entities.concretes.cv.enums.StorageType;
 
+@Component
 @Service
+@SpringBootApplication
 public class ImageInfoManager implements ImageInfoService{
 
 	private ImageInfoDao imageInfoDao;
@@ -30,22 +36,34 @@ public class ImageInfoManager implements ImageInfoService{
 		this.candidateDao = candidateDao;
 	}
 
-	@Override
-	public Result add(MultipartFile file, int candidateId) {
-		ImageInfo imageInfo = new ImageInfo();
-		
-		try {
-			String filePath= fileService.uploadFile(file);
-			imageInfo.setCandidate(candidateDao.findById(candidateId).orElseThrow());
-			imageInfo.setImageName(FileOperations.getFileName(file));
-			imageInfo.setStorageName(fileService.getFileStorageName());
-			imageInfo.setImagePath(filePath);	
-			
-		} catch (IOException e) {
-			throw new RuntimeException();
-		}
-		imageInfoDao.save(imageInfo);	
-		return new SuccessResult("Profil resminiz başarılı bir şekilde kaydedildi.");
+	@Override                                     // dosya yolu ile ekleme
+	public Result add(int resumeId, String path) {// path: yüklenecek fotonun dosya yolu
+		File file= (new File(path));// dosya yolu verilen foto cloudinary'e yüklenecek upload metodu ile
+		String link=fileService.upload(file);// link: cloudinary yüklenen fotonun linki
+		ImageInfo imageInfo = new ImageInfo(
+				resumeId, 
+				candidateDao.findById(resumeId).get().getFirstName()+candidateDao.findById(resumeId).get().getLastName(), 
+				link, 
+				StorageType.Cloudinary, 
+				candidateDao.findById(resumeId).get());
+		imageInfoDao.save(imageInfo);
+		candidateDao.save(candidateDao.findById(resumeId).get());			
+		return new SuccessResult("Foto yüklendi.Link: "+ link);
 	}
-
+	
+	@Override
+	public DataResult<ImageInfo> getById(int id) {
+		return new SuccessDataResult<ImageInfo>(this.imageInfoDao.findById(id).get(),"resim:");
+	}
+	
+	@Override
+	public DataResult<List<ImageInfo>> getAll() {
+		return new SuccessDataResult<List<ImageInfo>>(this.imageInfoDao.findAll(),"listelendi");
+	}
+	
+	@Override
+	public DataResult<List<ImageInfo>> getByCandidateId(int id) {
+		return new SuccessDataResult<List<ImageInfo>>(this.imageInfoDao.getByCandidate_Id(id));
+	}
+	
 }

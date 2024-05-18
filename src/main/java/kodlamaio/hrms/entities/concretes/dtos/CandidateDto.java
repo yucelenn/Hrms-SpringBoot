@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 public class CandidateDto {
 
 	private int id;
+	private String firstName;
+	private String lastName;
+	private String identityNumber;
+	private String birthYear;
 	private String schoolName;
 	private String departmantName;
 	private String degree;
@@ -28,5 +32,5 @@ public class CandidateDto {
 	private String linkedinLink;
 	private String technology;
 	private String coverLetterDescription;
-
+	//private String imagePath2;
 }
