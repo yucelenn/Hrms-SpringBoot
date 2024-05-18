@@ -29,4 +29,6 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getByLastNameStartsWith(String lastName);
 	DataResult<Candidate> findByeMail(String eMail);
 	DataResult<List<CandidateDto>> getCandidateCvDto();
+	DataResult<CandidateDto> getById(int id);
+	
 }
