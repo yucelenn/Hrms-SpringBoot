@@ -19,9 +19,9 @@ public class CloudinaryManager implements FileService {
 
 	public CloudinaryManager() {
 	    this.cloudinary = new com.cloudinary.Cloudinary(ObjectUtils.asMap(
-	                "cloud_name","xxxxxxxxxxxx",   //buraya Cloudinary dashboard'daki bilgiler girilecek.
-	                "api_key","xxxxxxxxxxxxxxxxx",
-	                "api_secret","xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+	    		"cloud_name","dsdksgrcb",   //buraya Cloudinary dashboard'daki bilgiler girilecek.
+                "api_key","333871571721336",
+                "api_secret","kbW2Sms6rf58VCSvSCmPpR-vZck"));
 	}
 	
 	@Override
