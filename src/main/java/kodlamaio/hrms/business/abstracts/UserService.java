@@ -15,4 +15,5 @@ public interface UserService {
 	Result add(User user);
 	DataResult<User> getById(int id);
 	DataResult<User> getByeMail(String eMail);
+	
 }
